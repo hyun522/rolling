@@ -1,34 +1,36 @@
-import { useState, useEffect } from 'react';
 import EmojiPicker from 'emoji-picker-react';
-import ArrowDown from '../../assets/images/arrow_down.png';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { addReaction } from '../../Api/api';
 import ArrowAdd from '../../assets/images/add-24.png';
+import ArrowDown from '../../assets/images/arrow_down.png';
 import Share from '../../assets/images/share-24.png';
 import Data from '../../mock.json';
 import {
   HeaderService,
   HeaderServiceBifurcationA,
   HeaderServiceBifurcationB,
-  HeaderServiceEmojiList,
+  HeaderServiceEmoji,
   HeaderServiceEmojiAdd,
   HeaderServiceEmojiButton,
-  HeaderServiceURLButton,
-  HeaderServiceEmoji,
-  HeaderServiceMessageCount,
-  HeaderServiceMessageCountText,
-  HeaderServiceName,
   HeaderServiceEmojiCount,
-  Testdiv,
+  HeaderServiceEmojiList,
+  HeaderServiceEmojiPicker,
+  HeaderServiceEmojiToggle,
   HeaderServiceImgA,
   HeaderServiceImgB,
   HeaderServiceImgC,
   HeaderServiceMans,
+  HeaderServiceMessageCount,
+  HeaderServiceMessageCountText,
   HeaderServiceMessageDiv,
-  HeaderServiceEmojiToggle,
-  HeaderServiceURLToggle,
-  HeaderServiceURLShareMenuKaKao,
-  HeaderServiceEmojiPicker,
   HeaderServiceMoblieFlex,
+  HeaderServiceName,
+  HeaderServiceURLButton,
   HeaderServiceURLShareMenu,
+  HeaderServiceURLShareMenuKaKao,
+  HeaderServiceURLToggle,
+  Testdiv,
 } from './MessageListPageCss';
 import URLToast from './URLSave';
 
@@ -40,6 +42,7 @@ const HeaderUser = () => {
   // 목데이터들인데 api주소 받으면 변경해서 작성.
   const { results } = Data;
   const [{ recentMessages }] = results;
+  const { id } = useParams();
 
   const { profileImageURL: profileImageURL1 } = recentMessages[0];
   const { profileImageURL: profileImageURL2 } = recentMessages[1];
@@ -48,6 +51,18 @@ const HeaderUser = () => {
   const handleEmoji = () => setEmoji(!emoji);
 
   const handleEmojiAdd = () => setShowEmojiPicker(!showEmojiPicker);
+
+  const handleEmojiClick = async (emojiData) => {
+    // eslint-disable-next-line no-shadow
+    const { emoji } = emojiData;
+
+    try {
+      const response = await addReaction(id, emoji);
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const handleURLShare = () => {
     setUrlShare(!urlShare);
@@ -121,7 +136,7 @@ const HeaderUser = () => {
             <p>추가</p>
             {showEmojiPicker && (
               <HeaderServiceEmojiPicker>
-                <EmojiPicker />
+                <EmojiPicker onEmojiClick={handleEmojiClick} />
               </HeaderServiceEmojiPicker>
             )}
           </HeaderServiceEmojiAdd>
