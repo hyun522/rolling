@@ -35,14 +35,14 @@ import {
 import URLToast from './URLSave';
 
 const HeaderUser = () => {
-  const [emoji, setEmoji] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
   const [emojiList, setEmojiList] = useState([]);
   const [urlMenu, setUrlMenu] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [urlShare, setUrlShare] = useState(false);
   // 목데이터들인데 api주소 받으면 변경해서 작성.
-  const { results } = Data;
-  const [{ recentMessages }] = results;
+  const { results: mockData } = Data;
+  const [{ recentMessages }] = mockData;
   const { id } = useParams();
 
   const { profileImageURL: profileImageURL1 } = recentMessages[0];
@@ -50,8 +50,8 @@ const HeaderUser = () => {
 
   const getReactionList = async (recipientId) => {
     try {
-      const { results: emojiDatas } = await getReactions(recipientId);
-      setEmojiList(emojiDatas);
+      const { results } = await getReactions(recipientId);
+      setEmojiList(results);
     } catch (error) {
       console.log(error.message);
     }
@@ -59,15 +59,15 @@ const HeaderUser = () => {
 
   const handleShare = () => setUrlMenu(!urlMenu);
 
-  const handleEmoji = () => setEmoji(!emoji);
+  const handleEmoji = () => setShowEmoji(!showEmoji);
 
   const handleEmojiAdd = () => setShowEmojiPicker(!showEmojiPicker);
 
   const handleEmojiClick = async (emojiData) => {
-    const { emoji: pickedEmoji } = emojiData;
+    const { emoji } = emojiData;
 
     try {
-      await addReaction(id, pickedEmoji);
+      await addReaction(id, emoji);
       getReactionList(id);
     } catch (error) {
       console.log(error.message);
@@ -95,7 +95,7 @@ const HeaderUser = () => {
   return (
     <Testdiv>
       <HeaderService>
-        <HeaderServiceName>To.{results[0].name}</HeaderServiceName>
+        <HeaderServiceName>To.{mockData[0].name}</HeaderServiceName>
         {urlShare && <URLToast />}
         <HeaderServiceMoblieFlex>
           <HeaderServiceMans>
@@ -125,7 +125,7 @@ const HeaderUser = () => {
             <HeaderServiceEmoji>
               🎉<HeaderServiceEmojiCount>10</HeaderServiceEmojiCount>
             </HeaderServiceEmoji>
-            {emoji && (
+            {showEmoji && (
               <HeaderServiceEmojiToggle>
                 <HeaderServiceEmoji>
                   😍<HeaderServiceEmojiCount>16</HeaderServiceEmojiCount>
