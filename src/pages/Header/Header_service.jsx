@@ -35,7 +35,7 @@ import {
 import URLToast from './URLSave';
 
 const HeaderUser = () => {
-  const [emoji, setEmoji] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
   const [urlMenu, setUrlMenu] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [urlShare, setUrlShare] = useState(false);
@@ -48,12 +48,11 @@ const HeaderUser = () => {
   const { profileImageURL: profileImageURL2 } = recentMessages[1];
   const handleShare = () => setUrlMenu(!urlMenu);
 
-  const handleEmoji = () => setEmoji(!emoji);
+  const handleEmoji = () => setShowEmoji(!showEmoji);
 
   const handleEmojiAdd = () => setShowEmojiPicker(!showEmojiPicker);
 
   const handleEmojiClick = async (emojiData) => {
-    // eslint-disable-next-line no-shadow
     const { emoji } = emojiData;
 
     try {
@@ -111,7 +110,7 @@ const HeaderUser = () => {
             <HeaderServiceEmoji>
               🎉<HeaderServiceEmojiCount>10</HeaderServiceEmojiCount>
             </HeaderServiceEmoji>
-            {emoji && (
+            {showEmoji && (
               <HeaderServiceEmojiToggle>
                 <HeaderServiceEmoji>
                   😍<HeaderServiceEmojiCount>16</HeaderServiceEmojiCount>
