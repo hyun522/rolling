@@ -105,6 +105,11 @@ const CreatePaperPage = () => {
       backgroundImageURL: selectImg,
     };
     postUserData(sendData);
+
+    setUserName('');
+    setSelectColor('beige');
+    setSelectImg('https://picsum.photos/id/683/3840/2160');
+
     if (!userName) {
       setError('값을 입력해 주세요.');
     } else {
