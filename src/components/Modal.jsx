@@ -1,39 +1,42 @@
 import styled from 'styled-components';
 
-import SampleImage from '../assets/images/home-emoji.png';
+const fontFamily = {
+  'Noto Sans': 'Noto Sans KR',
+  Pretendard: 'Pretendard',
+  나눔명조: 'Nanum Myeongjo',
+  '나눔손글씨 손편지체': 'Handletter',
+};
 
-const Modal = () => {
+const Modal = ({ modalDatas, setIsOpen }) => {
+  const {
+    sender,
+    profileImageURL,
+    relationship,
+    content,
+    font = 'Noto Sans',
+    createdAt,
+  } = modalDatas;
+
+  const handleIsOpen = () => setIsOpen(false);
+
   return (
     <Wrapper>
       <Container>
         <ModalHeader>
           <WriterArea>
-            <ProfileImage src={SampleImage} alt="profile" />
+            <ProfileImage src={profileImageURL} alt="profile" />
             <div>
               <Writer>
-                From. <span>김동훈</span>
+                From. <span>{sender}</span>
               </Writer>
-              <RelationShip>동료</RelationShip>
+              <RelationShip>{relationship}</RelationShip>
             </div>
           </WriterArea>
-          <Date>2023.07.08</Date>
+          <Date>{createdAt}</Date>
         </ModalHeader>
         <hr />
-        <ModalContents>
-          코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-          하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심
-          또 하세요!코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-          조심 또 하세요!코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력
-          모두 조심 또 하세요!코로나가 또다시 기승을 부리는 요즘이네요. 건강,
-          체력 모두 조심 또 하세요!코로나가 또다시 기승을 부리는 요즘이네요.
-          코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심 또
-          하세요! 코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두 조심
-          또 하세요!코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력 모두
-          조심 또 하세요!코로나가 또다시 기승을 부리는 요즘이네요. 건강, 체력
-          모두 조심 또 하세요!코로나가 또다시 기승을 부리는 요즘이네요. 건강,
-          체력 모두 조심 또 하세요!코로나가 또다시 기승을 부리는 요즘이네요.
-        </ModalContents>
-        <ModalButton>확인</ModalButton>
+        <ModalContents font={fontFamily[font]}>{content}</ModalContents>
+        <ModalButton onClick={handleIsOpen}>확인</ModalButton>
       </Container>
     </Wrapper>
   );
@@ -128,6 +131,7 @@ const ModalContents = styled.div`
   letter-spacing: -0.18px;
   overflow-y: auto;
   scrollbar-width: 4px;
+  font-family: ${(font) => `${font}, sans-serif`};
 
   &::-webkit-scrollbar {
     width: 20px;
