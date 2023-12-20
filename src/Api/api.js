@@ -29,3 +29,16 @@ export const addReaction = async (id, emoji) => {
   const result = await response.json();
   return result;
 };
+
+export const getReactions = async (id) => {
+  const response = await fetch(
+    `${BASE_URL}${BASE_QUERY}/recipients/${id}/reactions/`,
+  );
+
+  if (!response.ok) {
+    throw new Error('이모티콘 조회에 실패했습니다');
+  }
+
+  const result = await response.json();
+  return result;
+};

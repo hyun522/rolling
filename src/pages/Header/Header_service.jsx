@@ -1,7 +1,7 @@
 import EmojiPicker from 'emoji-picker-react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { addReaction } from '../../Api/api';
+import { addReaction, getReactions } from '../../Api/api';
 import ArrowAdd from '../../assets/images/add-24.png';
 import ArrowDown from '../../assets/images/arrow_down.png';
 import Share from '../../assets/images/share-24.png';
@@ -36,6 +36,7 @@ import URLToast from './URLSave';
 
 const HeaderUser = () => {
   const [emoji, setEmoji] = useState(false);
+  const [emojiList, setEmojiList] = useState([]);
   const [urlMenu, setUrlMenu] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [urlShare, setUrlShare] = useState(false);
@@ -46,6 +47,16 @@ const HeaderUser = () => {
 
   const { profileImageURL: profileImageURL1 } = recentMessages[0];
   const { profileImageURL: profileImageURL2 } = recentMessages[1];
+
+  const getReactionList = async (recipientId) => {
+    try {
+      const { results: emojiDatas } = await getReactions(recipientId);
+      setEmojiList(emojiDatas);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const handleShare = () => setUrlMenu(!urlMenu);
 
   const handleEmoji = () => setEmoji(!emoji);
@@ -56,8 +67,8 @@ const HeaderUser = () => {
     const { emoji: pickedEmoji } = emojiData;
 
     try {
-      const response = await addReaction(id, pickedEmoji);
-      console.log(response);
+      await addReaction(id, pickedEmoji);
+      getReactionList(id);
     } catch (error) {
       console.log(error.message);
     }
@@ -73,6 +84,10 @@ const HeaderUser = () => {
       setUrlShare(false); // 실행 후 상태 초기화
     }, 3000);
   }, [urlShare]);
+
+  useEffect(() => {
+    getReactionList(id);
+  }, [id]);
 
   // ----------------------
   // 3. boder bottom or boder top 둘중하나 작업.
