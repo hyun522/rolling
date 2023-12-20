@@ -1,6 +1,7 @@
 import EmojiPicker from 'emoji-picker-react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import Icon from '../../assets/images/Icon.png';
 import ArrowAdd from '../../assets/images/add-24.png';
 import ArrowDown from '../../assets/images/arrow_down.png';
 import Share from '../../assets/images/share-24.png';
@@ -41,7 +42,10 @@ const HeaderUser = () => {
   // 목데이터들인데 api주소 받으면 변경해서 작성.
   const { results } = Data;
   const [{ recentMessages }] = results;
+
   const location = useLocation();
+  const { pathname } = location;
+  const webUrl = `http://localhost:3000${pathname}`;
 
   const { profileImageURL: profileImageURL1 } = recentMessages[0];
   const { profileImageURL: profileImageURL2 } = recentMessages[1];
@@ -52,11 +56,27 @@ const HeaderUser = () => {
   const handleEmojiAdd = () => setShowEmojiPicker(!showEmojiPicker);
 
   const handleURLShare = () => {
-    const HOST = 'http://localhost:3000';
-    const { pathname } = location;
-    navigator.clipboard.writeText(`${HOST}${pathname}`).then(() => {
+    navigator.clipboard.writeText(webUrl).then(() => {
       setUrlShare(true);
     });
+  };
+
+  const handleShareKakaoClick = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+
+      kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: 'Rolling',
+          description: '코드잇 스프린트 프로젝트입니다',
+          imageUrl: Icon,
+          link: {
+            webUrl,
+          },
+        },
+      });
+    }
   };
 
   useEffect(() => {
@@ -67,6 +87,13 @@ const HeaderUser = () => {
       clearTimeout(timer);
     };
   }, [urlShare]);
+
+  useEffect(() => {
+    const KAKAO_KEY = '971f7771001245f764f53aed200f5a52';
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(KAKAO_KEY);
+    }
+  }, []);
 
   // ----------------------
   // 3. boder bottom or boder top 둘중하나 작업.
@@ -139,7 +166,7 @@ const HeaderUser = () => {
             <img src={Share} alt="공유기능" />
             {urlMenu && (
               <HeaderServiceURLToggle>
-                <HeaderServiceURLShareMenuKaKao>
+                <HeaderServiceURLShareMenuKaKao onClick={handleShareKakaoClick}>
                   카카오톡 공유
                 </HeaderServiceURLShareMenuKaKao>
 
