@@ -1,34 +1,35 @@
-import { useState, useEffect } from 'react';
 import EmojiPicker from 'emoji-picker-react';
-import ArrowDown from '../../assets/images/arrow_down.png';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import ArrowAdd from '../../assets/images/add-24.png';
+import ArrowDown from '../../assets/images/arrow_down.png';
 import Share from '../../assets/images/share-24.png';
 import Data from '../../mock.json';
 import {
   HeaderService,
   HeaderServiceBifurcationA,
   HeaderServiceBifurcationB,
-  HeaderServiceEmojiList,
+  HeaderServiceEmoji,
   HeaderServiceEmojiAdd,
   HeaderServiceEmojiButton,
-  HeaderServiceURLButton,
-  HeaderServiceEmoji,
-  HeaderServiceMessageCount,
-  HeaderServiceMessageCountText,
-  HeaderServiceName,
   HeaderServiceEmojiCount,
-  Testdiv,
+  HeaderServiceEmojiList,
+  HeaderServiceEmojiPicker,
+  HeaderServiceEmojiToggle,
   HeaderServiceImgA,
   HeaderServiceImgB,
   HeaderServiceImgC,
   HeaderServiceMans,
+  HeaderServiceMessageCount,
+  HeaderServiceMessageCountText,
   HeaderServiceMessageDiv,
-  HeaderServiceEmojiToggle,
-  HeaderServiceURLToggle,
-  HeaderServiceURLShareMenuKaKao,
-  HeaderServiceEmojiPicker,
   HeaderServiceMoblieFlex,
+  HeaderServiceName,
+  HeaderServiceURLButton,
   HeaderServiceURLShareMenu,
+  HeaderServiceURLShareMenuKaKao,
+  HeaderServiceURLToggle,
+  Testdiv,
 } from './MessageListPageCss';
 import URLToast from './URLSave';
 
@@ -40,6 +41,7 @@ const HeaderUser = () => {
   // 목데이터들인데 api주소 받으면 변경해서 작성.
   const { results } = Data;
   const [{ recentMessages }] = results;
+  const location = useLocation();
 
   const { profileImageURL: profileImageURL1 } = recentMessages[0];
   const { profileImageURL: profileImageURL2 } = recentMessages[1];
@@ -50,14 +52,20 @@ const HeaderUser = () => {
   const handleEmojiAdd = () => setShowEmojiPicker(!showEmojiPicker);
 
   const handleURLShare = () => {
-    setUrlShare(!urlShare);
+    const HOST = 'http://localhost:3000';
+    const { pathname } = location;
+    navigator.clipboard.writeText(`${HOST}${pathname}`).then(() => {
+      setUrlShare(true);
+    });
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      handleURLShare();
-      setUrlShare(false); // 실행 후 상태 초기화
+    const timer = setTimeout(() => {
+      setUrlShare(false);
     }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [urlShare]);
 
   // ----------------------
