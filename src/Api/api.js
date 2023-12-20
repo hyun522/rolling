@@ -1,16 +1,18 @@
-const BASE_URL = 'https://rolling-api.vercel.app/';
-// const BASE_QUERY = '2-8';
 
-// response is BackGroundImgs
-const FetchBackGround = async () => {
-  const response = await fetch(`${BASE_URL}background-images/`);
-  const result = response.json();
-  // console.log(result);
-  return result;
+const getInformation = async () => {
+  try {
+    const response = await fetch(
+      'https://rolling-api.vercel.app/2-8/recipients/?limit=0',
+    );
+    const body = await response.json();
+    return body;
+  } catch (err) {
+    console.log(err.message);
+  }
+
+  return;
 };
 
-export default FetchBackGround;
+export defalut getInformation;
 
-// const FetchMockData = async () => {
-//   const response = await fetch(``)
-// }
+
