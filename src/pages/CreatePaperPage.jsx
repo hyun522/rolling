@@ -98,12 +98,22 @@ const CreatePaperPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const sendData = {
-      team: '2-8',
-      name: userName,
-      backgroundColor: selectColor,
-      backgroundImageURL: selectImg,
-    };
+    let sendData;
+    if (isColor) {
+      sendData = {
+        team: '2-8',
+        name: userName,
+        backgroundColor: selectColor,
+      };
+    } else {
+      sendData = {
+        team: '2-8',
+        name: userName,
+        backgroundColor: selectColor,
+        backgroundImageURL: selectImg,
+      };
+    }
+
     postUserData(sendData);
 
     setUserName('');
