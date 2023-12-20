@@ -43,7 +43,7 @@ const HeaderUser = () => {
   // 목데이터들인데 api주소 받으면 변경해서 작성.
   const { results: mockData } = Data;
   const [{ recentMessages }] = mockData;
-  const { id } = useParams();
+  const { id: userId } = useParams();
 
   const { profileImageURL: profileImageURL1 } = recentMessages[0];
   const { profileImageURL: profileImageURL2 } = recentMessages[1];
@@ -67,8 +67,8 @@ const HeaderUser = () => {
     const { emoji } = emojiData;
 
     try {
-      await addReaction(id, emoji);
-      getReactionList(id);
+      await addReaction(userId, emoji);
+      getReactionList(userId);
     } catch (error) {
       console.log(error.message);
     }
@@ -86,8 +86,8 @@ const HeaderUser = () => {
   }, [urlShare]);
 
   useEffect(() => {
-    getReactionList(id);
-  }, [id]);
+    getReactionList(userId);
+  }, [userId]);
 
   // ----------------------
   // 3. boder bottom or boder top 둘중하나 작업.
@@ -116,29 +116,24 @@ const HeaderUser = () => {
           </HeaderServiceMans>
           <HeaderServiceBifurcationA />
           <HeaderServiceEmojiList>
-            <HeaderServiceEmoji>
-              👍<HeaderServiceEmojiCount>24</HeaderServiceEmojiCount>
-            </HeaderServiceEmoji>
-            <HeaderServiceEmoji>
-              😍<HeaderServiceEmojiCount>16</HeaderServiceEmojiCount>
-            </HeaderServiceEmoji>
-            <HeaderServiceEmoji>
-              🎉<HeaderServiceEmojiCount>10</HeaderServiceEmojiCount>
-            </HeaderServiceEmoji>
+            {emojiList.map(({ id, emoji, count }, idx) =>
+              idx < 3 ? (
+                <HeaderServiceEmoji key={id}>
+                  {emoji}
+                  <HeaderServiceEmojiCount>{count}</HeaderServiceEmojiCount>
+                </HeaderServiceEmoji>
+              ) : (
+                false
+              ),
+            )}
             {showEmoji && (
               <HeaderServiceEmojiToggle>
-                <HeaderServiceEmoji>
-                  😍<HeaderServiceEmojiCount>16</HeaderServiceEmojiCount>
-                </HeaderServiceEmoji>
-                <HeaderServiceEmoji>
-                  😍<HeaderServiceEmojiCount>100</HeaderServiceEmojiCount>
-                </HeaderServiceEmoji>
-                <HeaderServiceEmoji>😍</HeaderServiceEmoji>
-                <HeaderServiceEmoji>😍</HeaderServiceEmoji>
-                <HeaderServiceEmoji>😍</HeaderServiceEmoji>
-                <HeaderServiceEmoji />
-                <HeaderServiceEmoji />
-                <HeaderServiceEmoji />
+                {emojiList.map(({ id, emoji, count }) => (
+                  <HeaderServiceEmoji key={id}>
+                    {emoji}
+                    <HeaderServiceEmojiCount>{count}</HeaderServiceEmojiCount>
+                  </HeaderServiceEmoji>
+                ))}
               </HeaderServiceEmojiToggle>
             )}
           </HeaderServiceEmojiList>
