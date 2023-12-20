@@ -53,11 +53,10 @@ const HeaderUser = () => {
   const handleEmojiAdd = () => setShowEmojiPicker(!showEmojiPicker);
 
   const handleEmojiClick = async (emojiData) => {
-    // eslint-disable-next-line no-shadow
-    const { emoji } = emojiData;
+    const { emoji: pickedEmoji } = emojiData;
 
     try {
-      const response = await addReaction(id, emoji);
+      const response = await addReaction(id, pickedEmoji);
       console.log(response);
     } catch (error) {
       console.log(error.message);
