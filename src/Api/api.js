@@ -1,4 +1,4 @@
-
+// eslint-disable-next-line consistent-return
 const getInformation = async () => {
   try {
     const response = await fetch(
@@ -9,10 +9,6 @@ const getInformation = async () => {
   } catch (err) {
     console.log(err.message);
   }
-
-  return;
 };
 
-export defalut getInformation;
-
-
+export default getInformation;
