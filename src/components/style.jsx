@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledContainer = styled.div`
+const StyledForm = styled.form`
   margin: 47px auto 62px auto;
   width: 720px;
   background-color: white;
@@ -104,12 +104,9 @@ const StyledSection = styled.section`
     background-color: #fff;
     box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
     z-index: 1;
-    /* &.last-toggle {
-      position: static;
-    } */
   }
 
-  & p {
+  & p.message {
     display: none;
     &.error {
       display: block;
@@ -180,6 +177,34 @@ const StyledSection = styled.section`
 
     & .ql-editor {
       padding: 0;
+      font-size: 16px;
+      & strong {
+        font-weight: 700;
+      }
+      & em {
+        font-style: italic;
+      }
+      & ul {
+        position: static;
+        width: inherit;
+        padding-top: 0;
+        padding-bottom: 0;
+        border: none;
+        border-radius: none;
+        background-color: #fff;
+        box-shadow: none;
+        z-index: 0;
+      }
+
+      & li {
+        padding: 0;
+        color: inherit;
+        line-height: normal;
+      }
+
+      & li:hover {
+        background-color: inherit;
+      }
     }
 
     @media (max-width: 767px) {
@@ -234,7 +259,7 @@ const ProfileImgInput = styled.div`
 `;
 
 export {
-  StyledContainer,
+  StyledForm,
   StyledButton,
   StyledSection,
   ProfileImgList,

@@ -43,7 +43,6 @@ module.exports = {
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'prettier/prettier': [
       'error',
-
       {
         endOfLine: 'auto',
         singleQuote: true,

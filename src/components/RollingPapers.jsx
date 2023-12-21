@@ -18,13 +18,11 @@ const StyledRollingPapers = styled.div`
     @media (min-width: 769px) and (max-width: 1247px) {
       width: 100%;
       margin-top: 50px;
-      padding: 0 24px;
       gap: 16px;
       overflow: hidden;
     }
 
     @media (max-width: 768px) {
-      padding: 0 20px;
       gap: 12px;
       overflow: hidden;
     }
@@ -37,6 +35,12 @@ const StyledRollingPapers = styled.div`
       font-weight: 700;
       line-height: 36px;
       letter-spacing: -0.24px;
+      @media (min-width: 769px) and (max-width: 1247px) {
+        padding-left: 24px;
+      }
+      @media (max-width: 768px) {
+        padding-left: 20px;
+      }
     }
 
     & .Overgrid {
@@ -65,11 +69,13 @@ const StyledRollingPapers = styled.div`
             gap: 12px;
             width: 100%;
             transform: unset;
+            margin: 0 20px;
           }
           @media (min-width: 768px) and (max-width: 1248px) {
             gap: 20px;
             width: 100%;
             transform: unset;
+            margin: 0 24px;
           }
           @media (min-width: 1248px) {
             max-width: 1160px;
@@ -134,7 +140,7 @@ const RollingPapers = ({ items, list }) => {
     if (sliderBtnLeft.current && window.innerWidth > 1247) {
       sliderBtnLeft.current.style.display =
         currentIndex === 0 ? 'none' : 'block';
-    } /* if (sliderBtnLeft.current) */ else {
+    } else if (sliderBtnLeft.current) {
       sliderBtnLeft.current.style.display = 'none';
     }
 
@@ -142,7 +148,7 @@ const RollingPapers = ({ items, list }) => {
       const lastVisibleIndex = items.length - 4;
       sliderBtnRight.current.style.display =
         currentIndex === lastVisibleIndex ? 'none' : 'block';
-    } /* if (sliderBtnRight.current)  */ else {
+    } else if (sliderBtnRight.current) {
       sliderBtnRight.current.style.display = 'none';
     }
   }
