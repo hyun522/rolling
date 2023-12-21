@@ -1,6 +1,7 @@
 import EmojiPicker from 'emoji-picker-react';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { addReaction, getReactions } from '../../Api/api';
 import Icon from '../../assets/images/Icon.png';
 import ArrowAdd from '../../assets/images/add-24.png';
 import ArrowDown from '../../assets/images/arrow_down.png';
@@ -35,7 +36,8 @@ import URLToast from './URLSave';
 // 파라미터에 Data넣어야함.
 const HeaderUser = ({ data }) => {
   const { name, messageCount, recentMessages } = data;
-  const [emoji, setEmoji] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
+  const [emojiList, setEmojiList] = useState([]);
   const [urlMenu, setUrlMenu] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [urlShare, setUrlShare] = useState(false);
@@ -43,6 +45,16 @@ const HeaderUser = ({ data }) => {
   const location = useLocation();
   const { pathname } = location;
   const webUrl = `http://localhost:3000${pathname}`;
+  const { id: userId } = useParams();
+
+  const getReactionList = async (recipientId) => {
+    try {
+      const { results } = await getReactions(recipientId);
+      setEmojiList(results);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   // const fristImg = recentMessages[0].profileImageURL;
 
@@ -50,9 +62,20 @@ const HeaderUser = ({ data }) => {
   // const { profileImageURL: profileImageURL2 } = recentMessages[1];
   const handleShare = () => setUrlMenu(!urlMenu);
 
-  const handleEmoji = () => setEmoji(!emoji);
+  const handleEmoji = () => setShowEmoji(!showEmoji);
 
   const handleEmojiAdd = () => setShowEmojiPicker(!showEmojiPicker);
+
+  const handleEmojiClick = async (emojiData) => {
+    const { emoji } = emojiData;
+
+    try {
+      await addReaction(userId, emoji);
+      getReactionList(userId);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const handleURLShare = () => {
     navigator.clipboard.writeText(webUrl).then(() => {
@@ -79,6 +102,13 @@ const HeaderUser = ({ data }) => {
   };
 
   useEffect(() => {
+    const KAKAO_KEY = '971f7771001245f764f53aed200f5a52';
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(KAKAO_KEY);
+    }
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setUrlShare(false);
     }, 3000);
@@ -88,11 +118,8 @@ const HeaderUser = ({ data }) => {
   }, [urlShare]);
 
   useEffect(() => {
-    const KAKAO_KEY = '971f7771001245f764f53aed200f5a52';
-    if (!window.Kakao.isInitialized()) {
-      window.Kakao.init(KAKAO_KEY);
-    }
-  }, []);
+    getReactionList(userId);
+  }, [userId]);
 
   // ----------------------
   return (
@@ -120,29 +147,24 @@ const HeaderUser = ({ data }) => {
             </HeaderServiceMans>
             <HeaderServiceBifurcationA />
             <HeaderServiceEmojiList>
-              <HeaderServiceEmoji>
-                👍<HeaderServiceEmojiCount>24</HeaderServiceEmojiCount>
-              </HeaderServiceEmoji>
-              <HeaderServiceEmoji>
-                😍<HeaderServiceEmojiCount>16</HeaderServiceEmojiCount>
-              </HeaderServiceEmoji>
-              <HeaderServiceEmoji>
-                🎉<HeaderServiceEmojiCount>10</HeaderServiceEmojiCount>
-              </HeaderServiceEmoji>
-              {emoji && (
+              {emojiList.map(({ id, emoji, count }, idx) =>
+                idx < 3 ? (
+                  <HeaderServiceEmoji key={id}>
+                    {emoji}
+                    <HeaderServiceEmojiCount>{count}</HeaderServiceEmojiCount>
+                  </HeaderServiceEmoji>
+                ) : (
+                  false
+                ),
+              )}
+              {showEmoji && (
                 <HeaderServiceEmojiToggle>
-                  <HeaderServiceEmoji>
-                    😍<HeaderServiceEmojiCount>16</HeaderServiceEmojiCount>
-                  </HeaderServiceEmoji>
-                  <HeaderServiceEmoji>
-                    😍<HeaderServiceEmojiCount>100</HeaderServiceEmojiCount>
-                  </HeaderServiceEmoji>
-                  <HeaderServiceEmoji>😍</HeaderServiceEmoji>
-                  <HeaderServiceEmoji>😍</HeaderServiceEmoji>
-                  <HeaderServiceEmoji>😍</HeaderServiceEmoji>
-                  <HeaderServiceEmoji />
-                  <HeaderServiceEmoji />
-                  <HeaderServiceEmoji />
+                  {emojiList.map(({ id, emoji, count }) => (
+                    <HeaderServiceEmoji key={id}>
+                      {emoji}
+                      <HeaderServiceEmojiCount>{count}</HeaderServiceEmojiCount>
+                    </HeaderServiceEmoji>
+                  ))}
                 </HeaderServiceEmojiToggle>
               )}
             </HeaderServiceEmojiList>
@@ -154,7 +176,7 @@ const HeaderUser = ({ data }) => {
               <p>추가</p>
               {showEmojiPicker && (
                 <HeaderServiceEmojiPicker>
-                  <EmojiPicker />
+                  <EmojiPicker onEmojiClick={handleEmojiClick} />
                 </HeaderServiceEmojiPicker>
               )}
             </HeaderServiceEmojiAdd>
