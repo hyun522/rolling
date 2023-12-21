@@ -52,7 +52,6 @@ const getInformationLIke = async () => {
   }
 
   // eslint-disable-next-line consistent-return
-  return;
 };
 // 최근에 만든 롤링페이퍼
 /* eslint-disable no-useless-return */
@@ -71,4 +70,36 @@ const getInformation = async () => {
   return;
 };
 
-export { getInformationLIke, getInformation };
+export const addReaction = async (id, emoji) => {
+  const response = await fetch(
+    `${BASE_URL}${BASE_QUERY}recipients/${id}/reactions/`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({ emoji, type: 'increase' }),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error('이모티콘 등록에 실패했습니다');
+  }
+
+  const result = await response.json();
+  return result;
+};
+
+export const getReactions = async (id) => {
+  const response = await fetch(
+    `${BASE_URL}${BASE_QUERY}recipients/${id}/reactions/`,
+  );
+
+  if (!response.ok) {
+    throw new Error('이모티콘 조회에 실패했습니다');
+  }
+
+  const result = await response.json();
+  return result;
+};
+export { getInformation, getInformationLIke };
