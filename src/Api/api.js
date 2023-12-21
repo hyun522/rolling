@@ -72,7 +72,7 @@ export { getInformation, getInformationLIke };
 
 export const addReaction = async (id, emoji) => {
   const response = await fetch(
-    `${BASE_URL}${BASE_QUERY}/recipients/${id}/reactions/`,
+    `${BASE_URL}${BASE_QUERY}recipients/${id}/reactions/`,
     {
       method: 'POST',
       headers: {
@@ -92,7 +92,7 @@ export const addReaction = async (id, emoji) => {
 
 export const getReactions = async (id) => {
   const response = await fetch(
-    `${BASE_URL}${BASE_QUERY}/recipients/${id}/reactions/`,
+    `${BASE_URL}${BASE_QUERY}recipients/${id}/reactions/`,
   );
 
   if (!response.ok) {
