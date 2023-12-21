@@ -1,15 +1,11 @@
-import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { StyledForm, StyledButton } from '../components/style';
 import TextInputSection from '../components/TextInputSection';
 import ProfileImgInputSection from '../components/ProfileImgInputSection';
 import TextareaInputSection from '../components/TextareaInputSection';
 import ToggleDownSection from '../components/ToggleDownSection';
-import {
-  fetchProfileImg,
-  fetchRecipient,
-  createMessage,
-} from '../Api/messageApi';
+import { fetchRecipient, createMessage } from '../Api/messageApi';
 import Header from '../components/Header';
 
 const CreateMessagePage = () => {
@@ -20,6 +16,9 @@ const CreateMessagePage = () => {
   const [relationship, setRelationship] = useState('');
   const [content, setContent] = useState('');
   const [font, setFont] = useState('');
+  const navigate = useNavigate();
+
+  const { id } = useParams();
 
   // console.log('sender', sender);
   // console.log('profileImageURL', profileImageURL);
@@ -27,21 +26,23 @@ const CreateMessagePage = () => {
   // console.log('content', content);
   // console.log('font', font);
 
-  const getRecipientId = async () => {
-    const { results } = await fetchRecipient();
-    console.log(results.id);
-    setRecipientId(results.id);
-  };
+  // const getRecipientId = async () => {
+  //   const { results } = await fetchRecipient();
+  //   console.log('results', results);
+  //   // const { id } = results;
+  //   // console.log('id', id);
+  //   setRecipientId(id);
+  // };
 
-  useEffect(() => {
-    getRecipientId();
-  }, []);
+  // useEffect(() => {
+  //   getRecipientId();
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const messageData = {
       team: '2-8',
-      recipientId,
+      recipientId: id,
       sender,
       profileImageURL,
       relationship,
@@ -50,13 +51,14 @@ const CreateMessagePage = () => {
     };
     // console.log('data', messageData);
 
+    // await createMessage(messageData);
+    // console.log(createMessage());
+
     await createMessage(messageData);
-    console.log(createMessage());
+    console.log('id', id);
+    navigate(`/post/${id}`);
   };
 
-  if (handleSubmit === '') {
-    return <div>하이</div>;
-  }
   return (
     <>
       <Header />
@@ -83,9 +85,7 @@ const CreateMessagePage = () => {
         <ToggleDownSection optionType="font" last font={font} setFont={setFont}>
           폰트 선택
         </ToggleDownSection>
-        <Link to={`/post/${recipientId}`}>
-          <StyledButton type="submit">생성하기</StyledButton>
-        </Link>
+        <StyledButton type="submit">생성하기</StyledButton>
       </StyledForm>
     </>
   );
