@@ -50,9 +50,9 @@ const getInformationLIke = async () => {
   } catch (err) {
     console.log(err.message);
   }
-
-  return;
+  return null;
 };
+
 // 최근에 만든 롤링페이퍼
 /* eslint-disable no-useless-return */
 const getInformation = async () => {
@@ -67,8 +67,7 @@ const getInformation = async () => {
   }
 
   // eslint-disable-next-line consistent-return
-  return;
+  return null;
 };
 
 export { getInformationLIke, getInformation };
-
