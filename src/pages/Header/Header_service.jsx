@@ -35,7 +35,7 @@ import {
   HeaderServiceImgD,
 } from './MessageListPageCss';
 import URLToast from './URLSave';
-// 파라미터에 Data넣어야함.
+
 const HeaderUser = ({ data }) => {
   const { name, messageCount, recentMessages } = data;
   const [showEmoji, setShowEmoji] = useState(false);
@@ -78,7 +78,6 @@ const HeaderUser = ({ data }) => {
       console.log(error.message);
     }
   };
-
   const handleURLShare = () => {
     navigator.clipboard.writeText(webUrl).then(() => {
       setUrlShare(true);
@@ -122,9 +121,6 @@ const HeaderUser = ({ data }) => {
   useEffect(() => {
     getReactionList(userId);
   }, [userId]);
-  // 지금 제가 하고싶은게 1개라도 있으면 저 profileImageURL1 얘만 출력을하고싶거든요? 아니면 그냥 아예 없애던가!
-  // 좋은 방법이 있을까요?
-  // ----------------------
   return (
     <Testdiv>
       <HeaderService>
@@ -143,11 +139,11 @@ const HeaderUser = ({ data }) => {
                 <HeaderServiceImgC src={profileImageURL3} alt="프로필이미지" />
               )}
 
-              {messageCount <= 0 ? null : (
+              {messageCount > 3 ? (
                 <HeaderServiceImgD>
                   <p>+{messageCount - 3}</p>
                 </HeaderServiceImgD>
-              )}
+              ) : null}
 
               <HeaderServiceMessageDiv>
                 <HeaderServiceMessageCount>

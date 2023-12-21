@@ -5,7 +5,6 @@ const fetchProfileImg = async () => {
   const data = await response.json();
   return data;
 };
-
 const fetchRecipient = async () => {
   const response = await fetch(`${BASE_URL}2-8/recipients/`);
   const data = await response.json();

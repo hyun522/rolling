@@ -457,7 +457,7 @@ export const CardProfileComment = styled.div`
 `;
 
 export const CardProfileCreatedAt = styled.p`
-  margin: 0px 0px 24px 24px;
+  margin: 0px 24px 24px 24px;
   color: var(--gray-400, #999);
   font-family: Pretendard;
   font-size: 12px;
@@ -465,6 +465,8 @@ export const CardProfileCreatedAt = styled.p`
   font-weight: 400;
   line-height: 18px; /* 150% */
   letter-spacing: -0.06px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 // 쓰레기통 버튼들
@@ -568,8 +570,6 @@ export const ToastCompleted = styled.div`
   letter-spacing: -0.16px;
 `;
 
-// EmojiPicker라이브러리
-// 미디어쿼리 일단 임시방편으로 이렇게 처리함.
 export const HeaderServiceEmojiPicker = styled.div`
   right: 1px;
   top: 50px;
