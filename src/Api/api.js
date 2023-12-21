@@ -65,6 +65,8 @@ const getInformation = async () => {
   } catch (err) {
     console.log(err.message);
   }
+};
+
 
   // eslint-disable-next-line consistent-return
   return;

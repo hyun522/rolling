@@ -1,5 +1,6 @@
-import { styled } from 'styled-components';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
 import Header from '../components/Header';
 import CppCreateButton from '../components/CppCreateButton';
 import CppSelectButton from '../components/CppSelectButton';
@@ -42,7 +43,7 @@ const CppNameInput = styled.input`
   padding: 12px 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  ::placeholder {
+  &::placeholder {
     font-weight: 400;
     line-height: 26px;
     letter-spacing: -0.16px;
@@ -83,13 +84,15 @@ const CppBotBox = styled.div`
 const CreatePaperPage = () => {
   const [isColor, setIsColor] = useState(true);
   const [userName, setUserName] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [backgroundImgs, setBackgroundImgs] = useState(null);
   const [selectImg, setSelectImg] = useState(null);
   const [selectColor, setSelectColor] = useState('beige');
+  const navigate = useNavigate();
 
   const loadBackgroundImgData = async () => {
     const { imageUrls } = await getDataBackgroundImg();
+    console.log(imageUrls);
     setBackgroundImgs(imageUrls);
   };
 
@@ -99,23 +102,36 @@ const CreatePaperPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const sendData = {
-      team: '2-8',
-      name: userName,
-      backgroundColor: selectColor,
-      backgroundImageURL: selectImg,
-    };
-    postUserData(sendData);
+
     if (!userName) {
       setError('값을 입력해 주세요.');
-    } else {
-      setError(null);
-      console.log(userName);
+      return;
     }
+    setError(null);
+    console.log(userName);
+
+    let sendData;
+    if (isColor) {
+      sendData = {
+        team: '2-8',
+        name: userName,
+        backgroundColor: selectColor,
+      };
+    } else {
+      sendData = {
+        team: '2-8',
+        name: userName,
+        backgroundColor: selectColor,
+        backgroundImageURL: selectImg,
+      };
+    }
+
+    const { id } = await postUserData(sendData);
+    console.log(id);
+    navigate(`/post/${id}`);
   };
 
   const NameValueChange = (e) => {
-    // input의 value가 변경될때마다 그 값을 state에 반영.
     setUserName(e.target.value);
   };
 
