@@ -1,21 +1,21 @@
 import { useState } from 'react';
+import { MessageDeleteFetch } from '../../Api/api';
+import Deleted from '../../assets/images/deleted.png';
+import Modal from '../../components/Modal';
 import {
   CardContiner,
   CardPaper,
   CardProfile,
-  CardProfileSender,
-  CardProfileRelationship,
-  CardProfileTitle,
-  CardProfileFrom,
-  CardProfileName,
   CardProfileComment,
   CardProfileCreatedAt,
   CardProfileDeleted,
   CardProfileDeletedButton,
+  CardProfileFrom,
+  CardProfileName,
+  CardProfileRelationship,
+  CardProfileSender,
+  CardProfileTitle,
 } from '../Header/MessageListPageCss';
-import Deleted from '../../assets/images/deleted.png';
-import Modal from '../../components/Modal';
-import { MessageDeleteFetch } from '../../Api/api';
 
 const fontFamily = {
   'Noto Sans': 'Noto Sans KR',
@@ -50,9 +50,11 @@ const CardList = ({ item, isEditMode }) => {
     setIsOpen(true);
   };
   return (
-    <>
-      {isOpen && <Modal modalDatas={item} setIsOpen={setIsOpen} />}
-      <CardContiner>
+    <> 
+      {isOpen && (
+        <Modal date={newDateString} modalDatas={item} setIsOpen={setIsOpen} />
+      )}
+      <CardContiner onClick={handleModal}>
         <CardProfile>
           <CardPaper src={profileImageURL} alt="프로필이미지" />
           <CardProfileTitle>
