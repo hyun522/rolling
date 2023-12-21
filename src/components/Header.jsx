@@ -24,7 +24,7 @@ const StyledDiv = styled.div`
       padding: 11px 24px;
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: 1248px) {
       padding: 11px 0px;
       max-width: 1207px;
     }

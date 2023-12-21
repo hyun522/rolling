@@ -1,80 +1,92 @@
+/* eslint-disable array-callback-return */
 import { styled } from 'styled-components';
-// eslint-disable-next-line
-import cppCheck from '../assets/images/cppCheck.svg';
+import enabled from '../assets/images/Enabled.svg';
+import CppShowImgDiv from './CppShowImgDiv';
+
+const COLOR_CHIPS = [
+  { id: 1, option: 'beige' },
+  { id: 2, option: 'purple' },
+  { id: 3, option: 'blue' },
+  { id: 4, option: 'green' },
+];
 
 const ColorDiv = styled.div`
   margin: 45px 0;
   display: flex;
   justify-content: space-between;
-`;
-
-const ImgDiv = styled(ColorDiv)`
-  flex-wrap: wrap;
-  gap: 16px;
+  @media (max-width: 1200px) {
+    margin: 40px 0 340px;
+  }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    width: 320px;
+    margin: 28px 0 82px;
+    gap: 12px;
+  }
 `;
 
 const ShowColorDiv = styled.div`
-  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 168px;
   height: 168px;
   border-radius: 16px;
-  transition: all 1s;
-  img {
-    transition: all 1s;
-    display: none;
-  }
-  &:hover {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      display: flex;
-      background-color: #555;
-      padding: 10px;
-      border-radius: 50%;
-    }
+  @media (max-width: 768px) {
+    width: 154px;
+    height: 154px;
   }
 `;
 
-const ShowImgDiv = styled(ShowColorDiv)`
-  background-color: red;
+const StyledDiv = styled(ShowColorDiv)`
+  &.beige {
+    background-color: #ffe2ad;
+  }
+  &.purple {
+    background-color: #ecd9ff;
+  }
+  &.green {
+    background-color: #b1e4ff;
+  }
+  &.blue {
+    background-color: #d0f5c3;
+  }
 `;
 
-// eslint-disable-next-line
-const CppShowDiv = ({isColor}) => {
+const CppShowDiv = ({
+  isColor,
+  backgroundImgs,
+  selectColor,
+  setSelectColor,
+  selectImg,
+  setSelectImg,
+}) => {
+  const handleColorChange = (option) => {
+    setSelectColor(option);
+  };
+
   return (
     <div>
       {isColor ? (
         <ColorDiv>
-          <ShowColorDiv>
-            <img src={cppCheck} alt="" />
-          </ShowColorDiv>
-          <ShowColorDiv>
-            <img src={cppCheck} alt="" />
-          </ShowColorDiv>
-          <ShowColorDiv>
-            <img src={cppCheck} alt="" />
-          </ShowColorDiv>
-          <ShowColorDiv>
-            <img src={cppCheck} alt="" />
-          </ShowColorDiv>
+          {COLOR_CHIPS.map((item) => (
+            <StyledDiv
+              key={item.id}
+              className={item.option}
+              onClick={() => handleColorChange(item.option)}
+            >
+              {selectColor === item.option && (
+                <img src={enabled} alt="체크표시" />
+              )}
+            </StyledDiv>
+          ))}
         </ColorDiv>
       ) : (
-        <ImgDiv>
-          <ShowImgDiv>
-            <img src={cppCheck} alt="" />
-          </ShowImgDiv>
-          <ShowImgDiv>
-            <img src={cppCheck} alt="" />
-          </ShowImgDiv>
-          <ShowImgDiv>
-            <img src={cppCheck} alt="" />
-          </ShowImgDiv>
-          <ShowImgDiv>
-            <img src={cppCheck} alt="" />
-          </ShowImgDiv>
-        </ImgDiv>
+        <CppShowImgDiv
+          backgroundImgs={backgroundImgs}
+          selectImg={selectImg}
+          setSelectImg={setSelectImg}
+        />
       )}
     </div>
   );

@@ -119,6 +119,22 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  input,
+  button,
+  textarea {
+    border:none;
+  }
+  
+  input:focus,
+  input:active,
+  button:focus,
+  button:active,
+  textarea:focus,
+  textarea:active {
+    outline: none;
+    box-shadow: none;
+  }
 `;
 
 export default GlobalStyle;

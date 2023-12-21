@@ -5,7 +5,7 @@ import { addReaction, getReactions } from '../../Api/api';
 import ArrowAdd from '../../assets/images/add-24.png';
 import ArrowDown from '../../assets/images/arrow_down.png';
 import Share from '../../assets/images/share-24.png';
-import Data from '../../mock.json';
+// import Data from '../../mock.json';
 import {
   HeaderService,
   HeaderServiceBifurcationA,
@@ -17,10 +17,9 @@ import {
   HeaderServiceEmojiList,
   HeaderServiceEmojiPicker,
   HeaderServiceEmojiToggle,
-  HeaderServiceImgA,
-  HeaderServiceImgB,
   HeaderServiceImgC,
   HeaderServiceMans,
+  HeaderServiceMedio,
   HeaderServiceMessageCount,
   HeaderServiceMessageCountText,
   HeaderServiceMessageDiv,
@@ -33,20 +32,16 @@ import {
   Testdiv,
 } from './MessageListPageCss';
 import URLToast from './URLSave';
-
-const HeaderUser = () => {
+// 파라미터에 Data넣어야함.
+const HeaderUser = ({ data }) => {
+  const { name, messageCount, recentMessages } = data;
   const [showEmoji, setShowEmoji] = useState(false);
   const [emojiList, setEmojiList] = useState([]);
   const [urlMenu, setUrlMenu] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [urlShare, setUrlShare] = useState(false);
-  // 목데이터들인데 api주소 받으면 변경해서 작성.
-  const { results: mockData } = Data;
-  const [{ recentMessages }] = mockData;
-  const { id: userId } = useParams();
 
-  const { profileImageURL: profileImageURL1 } = recentMessages[0];
-  const { profileImageURL: profileImageURL2 } = recentMessages[1];
+  const { id: userId } = useParams();
 
   const getReactionList = async (recipientId) => {
     try {
@@ -57,6 +52,10 @@ const HeaderUser = () => {
     }
   };
 
+  // const fristImg = recentMessages[0].profileImageURL;
+
+  // const { profileImageURL: profileImageURL1 } = recentMessages[0];
+  // const { profileImageURL: profileImageURL2 } = recentMessages[1];
   const handleShare = () => setUrlMenu(!urlMenu);
 
   const handleEmoji = () => setShowEmoji(!showEmoji);
@@ -90,82 +89,82 @@ const HeaderUser = () => {
   }, [userId]);
 
   // ----------------------
-  // 3. boder bottom or boder top 둘중하나 작업.
-  // 의미없는 A,B 보더박스인척하는 div 없애고 보더만들기.
   return (
     <Testdiv>
       <HeaderService>
-        <HeaderServiceName>To.{mockData[0].name}</HeaderServiceName>
+        <HeaderServiceName>To.{name}</HeaderServiceName>
         {urlShare && <URLToast />}
-        <HeaderServiceMoblieFlex>
-          <HeaderServiceMans>
-            <HeaderServiceImgA src={profileImageURL1} alt="프로필이미지" />
-            <HeaderServiceImgB src={profileImageURL2} alt="프로필이미지" />
-            {/* -3 해야함. */}
-            <HeaderServiceImgC>
-              <p>+{recentMessages.length}</p>
-            </HeaderServiceImgC>
-            <HeaderServiceMessageDiv>
-              <HeaderServiceMessageCount>
-                {recentMessages.length}
-              </HeaderServiceMessageCount>
-              <HeaderServiceMessageCountText>
-                명이 작성했어요!
-              </HeaderServiceMessageCountText>
-            </HeaderServiceMessageDiv>
-          </HeaderServiceMans>
-          <HeaderServiceBifurcationA />
-          <HeaderServiceEmojiList>
-            {emojiList.map(({ id, emoji, count }, idx) =>
-              idx < 3 ? (
-                <HeaderServiceEmoji key={id}>
-                  {emoji}
-                  <HeaderServiceEmojiCount>{count}</HeaderServiceEmojiCount>
-                </HeaderServiceEmoji>
-              ) : (
-                false
-              ),
-            )}
-            {showEmoji && (
-              <HeaderServiceEmojiToggle>
-                {emojiList.map(({ id, emoji, count }) => (
+        <HeaderServiceMedio>
+          <HeaderServiceMoblieFlex>
+            <HeaderServiceMans>
+              {/* <HeaderServiceImgA src={profileImageURL1} alt="프로필이미지" />
+              <HeaderServiceImgB src={profileImageURL2} alt="프로필이미지" /> */}
+              {/* -3 해야함. */}
+              <HeaderServiceImgC>
+                {/* <p>+{recentMessages.length}</p> */}
+              </HeaderServiceImgC>
+              <HeaderServiceMessageDiv>
+                <HeaderServiceMessageCount>
+                  {/* {recentMessages.length} */}
+                </HeaderServiceMessageCount>
+                <HeaderServiceMessageCountText>
+                  명이 작성했어요!
+                </HeaderServiceMessageCountText>
+              </HeaderServiceMessageDiv>
+            </HeaderServiceMans>
+            <HeaderServiceBifurcationA />
+            <HeaderServiceEmojiList>
+              {emojiList.map(({ id, emoji, count }, idx) =>
+                idx < 3 ? (
                   <HeaderServiceEmoji key={id}>
                     {emoji}
                     <HeaderServiceEmojiCount>{count}</HeaderServiceEmojiCount>
                   </HeaderServiceEmoji>
-                ))}
-              </HeaderServiceEmojiToggle>
-            )}
-          </HeaderServiceEmojiList>
-          <HeaderServiceEmojiButton onClick={handleEmoji}>
-            <img src={ArrowDown} alt="이모티콘배열" />
-          </HeaderServiceEmojiButton>
-          <HeaderServiceEmojiAdd onClick={handleEmojiAdd}>
-            <img src={ArrowAdd} alt="이모티콘추가" />
-            <p>추가</p>
-            {showEmojiPicker && (
-              <HeaderServiceEmojiPicker>
-                <EmojiPicker onEmojiClick={handleEmojiClick} />
-              </HeaderServiceEmojiPicker>
-            )}
-          </HeaderServiceEmojiAdd>
+                ) : (
+                  false
+                ),
+              )}
+              {showEmoji && (
+                <HeaderServiceEmojiToggle>
+                  {emojiList.map(({ id, emoji, count }) => (
+                    <HeaderServiceEmoji key={id}>
+                      {emoji}
+                      <HeaderServiceEmojiCount>{count}</HeaderServiceEmojiCount>
+                    </HeaderServiceEmoji>
+                  ))}
+                </HeaderServiceEmojiToggle>
+              )}
+            </HeaderServiceEmojiList>
+            <HeaderServiceEmojiButton onClick={handleEmoji}>
+              <img src={ArrowDown} alt="이모티콘배열" />
+            </HeaderServiceEmojiButton>
+            <HeaderServiceEmojiAdd onClick={handleEmojiAdd}>
+              <img src={ArrowAdd} alt="이모티콘추가" />
+              <p>추가</p>
+              {showEmojiPicker && (
+                <HeaderServiceEmojiPicker>
+                  <EmojiPicker onEmojiClick={handleEmojiClick} />
+                </HeaderServiceEmojiPicker>
+              )}
+            </HeaderServiceEmojiAdd>
 
-          <HeaderServiceBifurcationB />
-          <HeaderServiceURLButton onClick={handleShare}>
-            <img src={Share} alt="공유기능" />
-            {urlMenu && (
-              <HeaderServiceURLToggle>
-                <HeaderServiceURLShareMenuKaKao>
-                  카카오톡 공유
-                </HeaderServiceURLShareMenuKaKao>
+            <HeaderServiceBifurcationB />
+            <HeaderServiceURLButton onClick={handleShare}>
+              <img src={Share} alt="공유기능" />
+              {urlMenu && (
+                <HeaderServiceURLToggle>
+                  <HeaderServiceURLShareMenuKaKao>
+                    카카오톡 공유
+                  </HeaderServiceURLShareMenuKaKao>
 
-                <HeaderServiceURLShareMenu onClick={handleURLShare}>
-                  URL 공유
-                </HeaderServiceURLShareMenu>
-              </HeaderServiceURLToggle>
-            )}
-          </HeaderServiceURLButton>
-        </HeaderServiceMoblieFlex>
+                  <HeaderServiceURLShareMenu onClick={handleURLShare}>
+                    URL 공유
+                  </HeaderServiceURLShareMenu>
+                </HeaderServiceURLToggle>
+              )}
+            </HeaderServiceURLButton>
+          </HeaderServiceMoblieFlex>
+        </HeaderServiceMedio>
       </HeaderService>
     </Testdiv>
   );
