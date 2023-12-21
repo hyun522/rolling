@@ -50,6 +50,8 @@ const getInformationLIke = async () => {
   } catch (err) {
     console.log(err.message);
   }
+
+  // eslint-disable-next-line consistent-return
 };
 // 최근에 만든 롤링페이퍼
 /* eslint-disable no-useless-return */
@@ -67,8 +69,6 @@ const getInformation = async () => {
   // eslint-disable-next-line consistent-return
   return;
 };
-
-export { getInformation, getInformationLIke };
 
 export const addReaction = async (id, emoji) => {
   const response = await fetch(
@@ -102,3 +102,4 @@ export const getReactions = async (id) => {
   const result = await response.json();
   return result;
 };
+export { getInformation, getInformationLIke };
