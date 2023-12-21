@@ -34,7 +34,7 @@ const modules = {
 
 const Editor = ({ content, setContent }) => {
   const handleOnChange = (value) => {
-    setContent(value.replaceAll(/<\/?p[^>]*>/g, '').replace('<br>', ''));
+    setContent(value.replaceAll(/<\/?p[^>]*>/g, ''));
   };
 
   return (
