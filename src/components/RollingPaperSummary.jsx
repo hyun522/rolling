@@ -45,6 +45,9 @@ const StyledLink = styled(Link)`
   overflow: hidden;
   position: relative;
   transition: transform 0.3s ease-in-out;
+  @media (max-width: 768px) {
+    padding: 30px 20px 20px 20px;
+  }
 
   &:hover {
     animation: ${shakeX} 0.5s ease-in-out infinite;
@@ -166,10 +169,9 @@ const CommenterImages = styled.div`
 
 const RollingPaperSummary = ({ item }) => {
   const DESTINATION = `/post/${item.id}`;
-
   return (
     <div className="slide">
-      <StyledLink item={item} to={DESTINATION}>
+      <StyledLink className="skeleton" item={item} to={DESTINATION}>
         {item.backgroundImageURL ? null : (
           <img
             src={(() => {
