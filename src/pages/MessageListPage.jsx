@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import HeaderUser from './Header/Header_service';
 import Main from './Main/Main';
-// import Data from '../mock.json';
 import Header from '../components/Header';
 import { QuestionPersonFetch, MessagePersonFetch } from '../Api/api';
 
@@ -37,7 +36,8 @@ const MessageListPage = () => {
     MessageListPadge(id);
   }, [id]);
 
-  const handleDelete = () => {
+  const handleDelete = (e) => {
+    e.stopPropagation();
     navigate('/list');
   };
 
