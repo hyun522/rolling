@@ -28,7 +28,6 @@ export const HeaderService = styled.div`
     width: 100%;
   }
 `;
-
 export const HeaderServiceMans = styled.div`
   position: relative;
   display: flex;

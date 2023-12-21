@@ -50,11 +50,11 @@ const CardList = ({ item, isEditMode }) => {
     setIsOpen(true);
   };
   return (
-    <> 
+    <>
       {isOpen && (
         <Modal date={newDateString} modalDatas={item} setIsOpen={setIsOpen} />
       )}
-      <CardContiner onClick={handleModal}>
+      <CardContiner>
         <CardProfile>
           <CardPaper src={profileImageURL} alt="프로필이미지" />
           <CardProfileTitle>

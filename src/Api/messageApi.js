@@ -10,7 +10,6 @@ const fetchRecipient = async () => {
   const data = await response.json();
   return data;
 };
-
 const createMessage = async (messageData) => {
   const response = await fetch(
     `${BASE_URL}2-8/recipients/${messageData.recipientId}/messages/`,
