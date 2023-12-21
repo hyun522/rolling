@@ -106,9 +106,11 @@ const LinkButton = styled(Link)`
   border: none;
   margin: 0 auto;
   margin-top: 24px;
+  margin-bottom: 150px;
 
   @media screen and (max-width: 1200px) {
     width: 100%;
+    margin-bottom: 24px;
   }
 `;
 

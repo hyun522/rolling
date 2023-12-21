@@ -46,10 +46,10 @@ const StyledDiv = styled(ShowColorDiv)`
     background-color: #ecd9ff;
   }
   &.green {
-    background-color: #b1e4ff;
+    background-color: #d0f5c3;
   }
   &.blue {
-    background-color: #d0f5c3;
+    background-color: #b1e4ff;
   }
 `;
 
