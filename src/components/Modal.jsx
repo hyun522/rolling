@@ -7,14 +7,13 @@ const fontFamily = {
   '나눔손글씨 손편지체': 'Handletter',
 };
 
-const Modal = ({ modalDatas, setIsOpen }) => {
+const Modal = ({ date, modalDatas, setIsOpen }) => {
   const {
     sender,
     profileImageURL,
     relationship,
     content,
     font = 'Noto Sans',
-    createdAt,
   } = modalDatas;
 
   const handleIsOpen = () => setIsOpen(false);
@@ -32,7 +31,7 @@ const Modal = ({ modalDatas, setIsOpen }) => {
               <RelationShip>{relationship}</RelationShip>
             </div>
           </WriterArea>
-          <Date>{createdAt}</Date>
+          <Date>{date}</Date>
         </ModalHeader>
         <hr />
         <ModalContents font={fontFamily[font]}>{content}</ModalContents>
