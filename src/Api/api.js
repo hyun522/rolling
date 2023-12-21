@@ -19,7 +19,7 @@ export const MessagePersonFetch = async (id) => {
 
 // 롤링페이퍼주인장 삭제하기.
 export const QuestionDeleteFetch = async (id) => {
-  const response = await fetch(`${BASE_URL}${BASE_QUERY}recipients/${id}`, {
+  const response = await fetch(`${BASE_URL}${BASE_QUERY}recipients/${id}/`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

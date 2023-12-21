@@ -3,14 +3,14 @@ import CardList from './CardList';
 import CardPlus from './CardPlus';
 import DeleteButton from './DeleteButton';
 
-const CardListUl = ({ isEditMode, onClick, id, messageData }) => {
+const CardListUl = ({ isEditMode, id, messageData }) => {
   const { results } = messageData;
 
   return (
     <MainUl>
       {isEditMode && (
         <CardDeletedFlex>
-          <DeleteButton onClick={onClick} />
+          <DeleteButton id={id} />
         </CardDeletedFlex>
       )}
 

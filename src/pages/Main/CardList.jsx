@@ -35,7 +35,8 @@ const CardList = ({ item, isEditMode }) => {
     id,
   } = item;
 
-  const handleDelete = async () => {
+  const handleDelete = async (e) => {
+    e.stopPropagation();
     await MessageDeleteFetch(id);
     window.location.reload();
   };
