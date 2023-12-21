@@ -70,7 +70,7 @@ export const HeaderServiceMedio = styled.div`
 
 export const HeaderServiceImgA = styled.img`
   position: absolute;
-  left: -50px;
+  left: -66px;
   border-radius: 140px;
   border: 1.4px solid #fff;
   width: 28px;
@@ -78,18 +78,26 @@ export const HeaderServiceImgA = styled.img`
 `;
 export const HeaderServiceImgB = styled.img`
   position: absolute;
-  left: -36px;
+  left: -50px;
   border-radius: 140px;
   border: 1.4px solid #fff;
   width: 28px;
   height: 28px;
 `;
-export const HeaderServiceImgC = styled.div`
+export const HeaderServiceImgC = styled.img`
+  position: absolute;
+  left: -34px;
+  border-radius: 140px;
+  border: 1.4px solid #fff;
+  width: 28px;
+  height: 28px;
+`;
+export const HeaderServiceImgD = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
   position: absolute;
-  left: -22px;
+  left: -18px;
   border-radius: 140px;
   border: 1.4px solid #fff;
   width: 28px;
@@ -568,7 +576,7 @@ export const HeaderServiceEmojiPicker = styled.div`
   z-index: 2;
   position: absolute;
   @media screen and (max-width: 768px) {
-    right: 230px;
+    right: 210px;
     width: 100%;
   }
 `;

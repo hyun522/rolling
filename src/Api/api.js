@@ -11,7 +11,7 @@ export const QuestionPersonFetch = async (id) => {
 // 메시지 받아오기
 export const MessagePersonFetch = async (id) => {
   const response = await fetch(
-    `${BASE_URL}${BASE_QUERY}/recipients/${id}/messages/?limit=8&offset=8`,
+    `${BASE_URL}${BASE_QUERY}recipients/${id}/messages/?limit=8`,
   );
   const result = response.json();
   return result;
@@ -51,7 +51,6 @@ const getInformationLIke = async () => {
     console.log(err.message);
   }
   return null;
-
 };
 
 // 최근에 만든 롤링페이퍼
@@ -66,10 +65,6 @@ const getInformation = async () => {
   } catch (err) {
     console.log(err.message);
   }
-};
-
-
-  // eslint-disable-next-line consistent-return
   return null;
 };
 

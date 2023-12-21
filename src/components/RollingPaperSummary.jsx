@@ -229,7 +229,7 @@ const RollingPaperSummary = ({ item }) => {
             )}
           </CommenterImages>
           <p className="howManyWriters">
-            <strong>{item.recentMessages.length}</strong>명이 작성했어요!
+            <strong>{item.messageCount}</strong>명이 작성했어요!
           </p>
         </div>
         <div className="emoji">

@@ -25,10 +25,11 @@ const MainContent = styled.div`
   } */
 `;
 
-const Main = ({ isEditMode, data, onClick, id }) => {
+const Main = ({ isEditMode, data, onClick, id, messageData }) => {
   return (
     <MainContent data={data}>
       <CardListUl
+        messageData={messageData}
         isEditMode={isEditMode}
         data={data}
         onClick={onClick}

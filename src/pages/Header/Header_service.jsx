@@ -6,7 +6,6 @@ import Icon from '../../assets/images/Icon.png';
 import ArrowAdd from '../../assets/images/add-24.png';
 import ArrowDown from '../../assets/images/arrow_down.png';
 import Share from '../../assets/images/share-24.png';
-// import Data from '../../mock.json';
 import {
   HeaderService,
   HeaderServiceBifurcationA,
@@ -31,6 +30,9 @@ import {
   HeaderServiceURLShareMenuKaKao,
   HeaderServiceURLToggle,
   Testdiv,
+  HeaderServiceImgA,
+  HeaderServiceImgB,
+  HeaderServiceImgD,
 } from './MessageListPageCss';
 import URLToast from './URLSave';
 // 파라미터에 Data넣어야함.
@@ -56,10 +58,10 @@ const HeaderUser = ({ data }) => {
     }
   };
 
-  // const fristImg = recentMessages[0].profileImageURL;
+  const profileImageURL1 = recentMessages[0]?.profileImageURL;
+  const profileImageURL2 = recentMessages[1]?.profileImageURL;
+  const profileImageURL3 = recentMessages[2]?.profileImageURL;
 
-  // const { profileImageURL: profileImageURL1 } = recentMessages[0];
-  // const { profileImageURL: profileImageURL2 } = recentMessages[1];
   const handleShare = () => setUrlMenu(!urlMenu);
 
   const handleEmoji = () => setShowEmoji(!showEmoji);
@@ -120,7 +122,8 @@ const HeaderUser = ({ data }) => {
   useEffect(() => {
     getReactionList(userId);
   }, [userId]);
-
+  // 지금 제가 하고싶은게 1개라도 있으면 저 profileImageURL1 얘만 출력을하고싶거든요? 아니면 그냥 아예 없애던가!
+  // 좋은 방법이 있을까요?
   // ----------------------
   return (
     <Testdiv>
@@ -130,15 +133,25 @@ const HeaderUser = ({ data }) => {
         <HeaderServiceMedio>
           <HeaderServiceMoblieFlex>
             <HeaderServiceMans>
-              {/* <HeaderServiceImgA src={profileImageURL1} alt="프로필이미지" />
-              <HeaderServiceImgB src={profileImageURL2} alt="프로필이미지" /> */}
-              {/* -3 해야함. */}
-              <HeaderServiceImgC>
-                {/* <p>+{recentMessages.length}</p> */}
-              </HeaderServiceImgC>
+              {profileImageURL1 && (
+                <HeaderServiceImgA src={profileImageURL1} alt="프로필이미지" />
+              )}
+              {profileImageURL2 && (
+                <HeaderServiceImgB src={profileImageURL2} alt="프로필이미지" />
+              )}
+              {profileImageURL3 && (
+                <HeaderServiceImgC src={profileImageURL3} alt="프로필이미지" />
+              )}
+
+              {messageCount <= 0 ? null : (
+                <HeaderServiceImgD>
+                  <p>+{messageCount - 3}</p>
+                </HeaderServiceImgD>
+              )}
+
               <HeaderServiceMessageDiv>
                 <HeaderServiceMessageCount>
-                  {/* {recentMessages.length} */}
+                  {messageCount}
                 </HeaderServiceMessageCount>
                 <HeaderServiceMessageCountText>
                   명이 작성했어요!
