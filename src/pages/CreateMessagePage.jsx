@@ -1,62 +1,42 @@
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { StyledForm, StyledButton } from '../components/style';
 import TextInputSection from '../components/TextInputSection';
 import ProfileImgInputSection from '../components/ProfileImgInputSection';
 import TextareaInputSection from '../components/TextareaInputSection';
 import ToggleDownSection from '../components/ToggleDownSection';
-import {
-  fetchProfileImg,
-  fetchRecipient,
-  createMessage,
-} from '../Api/messageApi';
+import { createMessage } from '../Api/messageApi';
 import Header from '../components/Header';
 
 const CreateMessagePage = () => {
   const [recipientId, setRecipientId] = useState('');
-  const [sender, setSender] = useState(''); // 부모
-  // 자식에게 필요한 것들을 부모에서 props로 전달
-  const [profileImageURL, setProfileImageURL] = useState('');
+  const [sender, setSender] = useState('');
+  const [profileImageURL, setProfileImageURL] = useState(
+    'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png',
+  );
   const [relationship, setRelationship] = useState('');
   const [content, setContent] = useState('');
   const [font, setFont] = useState('');
+  const navigate = useNavigate();
 
-  // console.log('sender', sender);
-  // console.log('profileImageURL', profileImageURL);
-  // console.log('relationship', relationship);
-  // console.log('content', content);
-  // console.log('font', font);
-
-  const getRecipientId = async () => {
-    const { results } = await fetchRecipient();
-    console.log(results.id);
-    setRecipientId(results.id);
-  };
-
-  useEffect(() => {
-    getRecipientId();
-  }, []);
+  const { id } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const messageData = {
       team: '2-8',
-      recipientId,
+      recipientId: id,
       sender,
       profileImageURL,
       relationship,
       content,
       font,
     };
-    // console.log('data', messageData);
 
     await createMessage(messageData);
-    console.log(createMessage());
+    navigate(`/post/${id}`);
   };
 
-  if (handleSubmit === '') {
-    return <div>하이</div>;
-  }
   return (
     <>
       <Header />
@@ -83,9 +63,7 @@ const CreateMessagePage = () => {
         <ToggleDownSection optionType="font" last font={font} setFont={setFont}>
           폰트 선택
         </ToggleDownSection>
-        <Link to={`/post/${recipientId}`}>
-          <StyledButton type="submit">생성하기</StyledButton>
-        </Link>
+        <StyledButton type="submit">생성하기</StyledButton>
       </StyledForm>
     </>
   );

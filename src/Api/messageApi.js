@@ -14,7 +14,7 @@ const fetchRecipient = async () => {
 
 const createMessage = async (messageData) => {
   const response = await fetch(
-    `${BASE_URL}recipients/${messageData.recipientId}/messages/`,
+    `${BASE_URL}2-8/recipients/${messageData.recipientId}/messages/`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -45,7 +45,6 @@ const ToggleDownSection = ({
 
   const selectOption = (e) => {
     setSelected(e.target.textContent);
-    // setIsOpen(false);
   };
 
   if (optionType === 'relationship') {
