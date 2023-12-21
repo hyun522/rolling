@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import RollingPapers from '../components/RollingPapers';
-import getInformation from '../Api/api';
+import { getInformation, getInformationLIke } from '../Api/api';
 
 const ButtonArea = styled.div`
   display: flex;
@@ -54,27 +54,26 @@ const ButtonLink = styled(Link)`
 
 const PaperListPage = () => {
   const [data, setData] = useState([]);
+  const [likeData, setLikeData] = useState([]);
 
   const getData = async () => {
     const { results } = await getInformation();
     setData(results);
   };
+  const getLikeData = async () => {
+    const { results } = await getInformationLIke();
+    setLikeData(results);
+  };
   useEffect(() => {
     getData();
+    getLikeData();
   }, []);
-
-  const polularList = data.toSorted(
-    (a, b) => b.recentMessages.length - a.recentMessages.length,
-  );
-  const recentList = data.toSorted(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
 
   return (
     <>
       <Header hidden="false" />
-      <RollingPapers items={polularList} list="popular" />
-      <RollingPapers items={recentList} />
+      <RollingPapers items={likeData} list="popular" />
+      <RollingPapers items={data} />
       <ButtonArea>
         <ButtonLink to="/Post">나도 만들어보기</ButtonLink>
       </ButtonArea>

@@ -166,6 +166,7 @@ const CommenterImages = styled.div`
 
 const RollingPaperSummary = ({ item }) => {
   const DESTINATION = `/post/${item.id}`;
+
   return (
     <div className="slide">
       <StyledLink item={item} to={DESTINATION}>

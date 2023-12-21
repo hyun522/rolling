@@ -1,31 +1,5 @@
 import { styled } from 'styled-components';
 
-export const Header = styled.div`
-  background-color: #fff;
-  display: flex;
-  padding: 11px 360px;
-  align-items: center;
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
-`;
-
-export const HeaderGap = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-export const HeaderFont = styled.h1`
-  color: var(--gray-light-gray-90, #4a494f);
-  text-align: center;
-  font-family: Poppins;
-  font-size: 19.971px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
-
 // ------------- headerService 레이아웃
 
 export const Testdiv = styled.div`
@@ -64,8 +38,6 @@ export const HeaderServiceMans = styled.div`
   }
 `;
 
-/// 여기서 부터 목데이터구간 수정 필요함.
-//   margin-right: 263px;
 export const HeaderServiceName = styled.h1`
   color: var(--gray-800, #2b2b2b);
   width: 490px;
@@ -84,6 +56,15 @@ export const HeaderServiceName = styled.h1`
     display: flex;
     padding: 12px 20px;
     align-items: center;
+    border-bottom: 1px solid #ededed;
+  }
+`;
+
+export const HeaderServiceMedio = styled.div`
+  @media screen and (max-width: 767px) {
+    padding: 8px 20px;
+    background-color: white;
+    width: 100%;
   }
 `;
 
@@ -147,8 +128,6 @@ export const HeaderServiceMessageCountText = styled.p`
   line-height: 27px;
 `;
 
-// 여기까지 목데이터 구간 수정 필요함
-
 export const HeaderServiceBifurcationA = styled.div`
   width: 1px;
   height: 28px;
@@ -187,7 +166,7 @@ export const HeaderServiceEmojiCount = styled.p`
 export const HeaderServiceEmojiList = styled.div`
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
 `;
 
@@ -328,7 +307,8 @@ export const CardContiner = styled.li`
     width: 100%;
   }
 `;
-// 카드 추가컨테이너
+
+// 카드 추가 컨테이너
 export const CardCreateContiner = styled.li`
   display: flex;
   width: 384px;
@@ -348,8 +328,6 @@ export const CardCreateContiner = styled.li`
   }
 `;
 
-// flex 작업 해야함. 일단 임시방편으로 position작업
-// position으로 해도 괜찮을지도..?
 export const CreateButton = styled.button`
   width: 56px;
   height: 56px;
@@ -359,14 +337,6 @@ export const CreateButton = styled.button`
   border-radius: 100px;
   background: var(--gray-500, #555);
 `;
-
-// export const MainContent = styled.div`
-//   position: relative;
-//   background-color: ${(props) => props.backgroundColor || 'transparent'};
-//   background-image: ${(props) =>
-//     props.backgroundColor ? 'none' : `url(${props.backgroundImageURL})`};
-//   width: 100%;
-// `;
 
 export const MainUl = styled.ul`
   padding: 113px 0px;
@@ -389,7 +359,7 @@ export const MainUl = styled.ul`
   }
   @media screen and (max-width: 767px) {
     grid-template-columns: 1fr;
-    padding: 128px 24px;
+    padding: 160px 24px 38px;
   }
 `;
 
@@ -459,8 +429,6 @@ export const CardProfileName = styled.p`
   font-weight: 700;
   line-height: 24px; /* 120% */
 `;
-// white-space: nowrap; 얘는 한줄만 표시 이거 써서 한줄로 한 다음 말 줄임표를 쓸지 말지 고민입니다.
-// text-overflow: ellipsis; 얘는 넘칠때 말줄임표료 변경
 
 export const CardProfileComment = styled.div`
   padding: 16px 24px 16px;

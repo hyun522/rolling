@@ -134,7 +134,7 @@ const RollingPapers = ({ items, list }) => {
     if (sliderBtnLeft.current && window.innerWidth > 1247) {
       sliderBtnLeft.current.style.display =
         currentIndex === 0 ? 'none' : 'block';
-    } /* if (sliderBtnLeft.current) */ else {
+    } else if (sliderBtnLeft.current) {
       sliderBtnLeft.current.style.display = 'none';
     }
 
@@ -142,7 +142,7 @@ const RollingPapers = ({ items, list }) => {
       const lastVisibleIndex = items.length - 4;
       sliderBtnRight.current.style.display =
         currentIndex === lastVisibleIndex ? 'none' : 'block';
-    } /* if (sliderBtnRight.current)  */ else {
+    } else if (sliderBtnRight.current) {
       sliderBtnRight.current.style.display = 'none';
     }
   }

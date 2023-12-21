@@ -62,6 +62,7 @@ const CppBotBox = styled.div`
     line-height: 36px;
     letter-spacing: -0.24px;
   }
+
   & .text_box .text {
     color: #555;
     font-size: 16px;

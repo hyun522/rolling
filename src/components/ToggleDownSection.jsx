@@ -3,7 +3,15 @@ import { StyledSection } from './style';
 import ToggleArrowDown from '../assets/images/toggle-arrow-down.svg';
 import ToggleArrowUp from '../assets/images/toggle-arrow-up.svg';
 
-const ToggleDownSection = ({ children, optionType, last }) => {
+const ToggleDownSection = ({
+  children,
+  optionType,
+  last,
+  relationship,
+  setRelationship,
+  font,
+  setFont,
+}) => {
   let options = [];
 
   if (optionType === 'relationship') {
@@ -12,7 +20,7 @@ const ToggleDownSection = ({ children, optionType, last }) => {
     options = ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'];
   }
 
-  const optionsRef = useRef();
+  const buttonRef = useRef();
   const [selected, setSelected] = useState(options[0]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,31 +29,35 @@ const ToggleDownSection = ({ children, optionType, last }) => {
     e.target.classList.toggle('focus');
   };
 
-  // TODO 토글 다운 옵션 외부 클릭해도 닫히지
-  const handleCloseOptions = (e) => {
-    if (
-      isOpen &&
-      (!optionsRef.current || !optionsRef.current.contains(e.target))
-    )
-      setIsOpen(false);
-  };
-
   useEffect(() => {
+    const handleCloseOptions = (e) => {
+      if (!buttonRef.current) {
+        return;
+      }
+      if (isOpen && !buttonRef.current.contains(e.target)) setIsOpen(false);
+    };
+
     window.addEventListener('click', handleCloseOptions);
     return () => {
       window.removeEventListener('click', handleCloseOptions);
     };
-  }, []);
+  }, [isOpen]);
 
   const selectOption = (e) => {
     setSelected(e.target.textContent);
-    setIsOpen(false);
+    // setIsOpen(false);
   };
+
+  if (optionType === 'relationship') {
+    setRelationship(selected);
+  } else if (optionType === 'font') {
+    setFont(selected);
+  }
 
   return (
     <StyledSection last={last}>
       <label htmlFor={options}>{children}</label>
-      <button type="button" onClick={handleOptions}>
+      <button type="button" onClick={handleOptions} ref={buttonRef}>
         {selected}
         {isOpen ? (
           <img src={ToggleArrowUp} alt="드롭다운 화살표 이미지" />
@@ -55,8 +67,8 @@ const ToggleDownSection = ({ children, optionType, last }) => {
       </button>
       <div className="toggle-options">
         {isOpen && (
-          <ul ref={optionsRef}>
-            {[...options].map((option) => {
+          <ul>
+            {options.map((option) => {
               return (
                 <li onClick={selectOption} onKeyDown={selectOption}>
                   {option}

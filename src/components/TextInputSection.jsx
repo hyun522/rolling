@@ -1,7 +1,7 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { StyledSection } from './style';
 
-const TextInputSection = ({ children }) => {
+const TextInputSection = ({ children, sender, setSender }) => {
   const inputRef = useRef();
   const pRef = useRef();
 
@@ -16,12 +16,16 @@ const TextInputSection = ({ children }) => {
   };
 
   useEffect(() => {
-    inputRef.current.addEventListener('focusout', showErrorMessage);
+    inputRef.current?.addEventListener('focusout', showErrorMessage);
 
     return () => {
-      inputRef.current.removeEventListener('focusout', showErrorMessage);
+      inputRef.current?.removeEventListener('focusout', showErrorMessage);
     };
   }, []);
+
+  const handleOnChange = (e) => {
+    setSender(e.currentTarget.value);
+  };
 
   return (
     <StyledSection>
@@ -30,11 +34,15 @@ const TextInputSection = ({ children }) => {
         <input
           type="text"
           id="sender"
+          name="sender"
           placeholder="이름을 입력해 주세요."
-          // onBlur={showErrorMessage}
           ref={inputRef}
+          value={sender}
+          onChange={handleOnChange}
         />
-        <p ref={pRef}>값을 입력해 주세요</p>
+        <p className="message" ref={pRef}>
+          값을 입력해 주세요
+        </p>
       </div>
     </StyledSection>
   );

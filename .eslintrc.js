@@ -33,7 +33,6 @@ module.exports = {
       { namedComponents: 'arrow-function' },
     ],
 
-
     'jsx-a11y/label-has-associated-control': [
       2,
       {
@@ -42,9 +41,8 @@ module.exports = {
     ],
     'react/jsx-no-useless-fragment': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
-    "prettier/prettier": [
-      "error",
-
+    'prettier/prettier': [
+      'error',
       {
         endOfLine: 'auto',
         singleQuote: true,
@@ -52,6 +50,5 @@ module.exports = {
     ],
 
     'react/prop-type': 'off',
-
   },
 };
