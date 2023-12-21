@@ -1,42 +1,25 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StyledForm, StyledButton } from '../components/style';
 import TextInputSection from '../components/TextInputSection';
 import ProfileImgInputSection from '../components/ProfileImgInputSection';
 import TextareaInputSection from '../components/TextareaInputSection';
 import ToggleDownSection from '../components/ToggleDownSection';
-import { fetchRecipient, createMessage } from '../Api/messageApi';
+import { createMessage } from '../Api/messageApi';
 import Header from '../components/Header';
 
 const CreateMessagePage = () => {
   const [recipientId, setRecipientId] = useState('');
-  const [sender, setSender] = useState(''); // 부모
-  // 자식에게 필요한 것들을 부모에서 props로 전달
-  const [profileImageURL, setProfileImageURL] = useState('');
+  const [sender, setSender] = useState('');
+  const [profileImageURL, setProfileImageURL] = useState(
+    'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png',
+  );
   const [relationship, setRelationship] = useState('');
   const [content, setContent] = useState('');
   const [font, setFont] = useState('');
   const navigate = useNavigate();
 
   const { id } = useParams();
-
-  // console.log('sender', sender);
-  // console.log('profileImageURL', profileImageURL);
-  // console.log('relationship', relationship);
-  // console.log('content', content);
-  // console.log('font', font);
-
-  // const getRecipientId = async () => {
-  //   const { results } = await fetchRecipient();
-  //   console.log('results', results);
-  //   // const { id } = results;
-  //   // console.log('id', id);
-  //   setRecipientId(id);
-  // };
-
-  // useEffect(() => {
-  //   getRecipientId();
-  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,16 +32,10 @@ const CreateMessagePage = () => {
       content,
       font,
     };
-    // console.log('data', messageData);
-
-    // await createMessage(messageData);
-    // console.log(createMessage());
 
     await createMessage(messageData);
     navigate(`/post/${id}`);
   };
-
-  console.log('content', content);
 
   return (
     <>
