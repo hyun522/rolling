@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 const CreateButton = styled.button`
@@ -25,11 +24,7 @@ const CreateButton = styled.button`
 `;
 
 const CppCreateButton = () => {
-  return (
-    <Link to="/post:id">
-      <CreateButton type="submit">생성하기</CreateButton>;
-    </Link>
-  );
+  return <CreateButton type="submit">생성하기</CreateButton>;
 };
 
 export default CppCreateButton;
