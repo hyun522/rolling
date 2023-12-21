@@ -55,9 +55,10 @@ const CreateMessagePage = () => {
     // console.log(createMessage());
 
     await createMessage(messageData);
-    console.log('id', id);
     navigate(`/post/${id}`);
   };
+
+  console.log('content', content);
 
   return (
     <>

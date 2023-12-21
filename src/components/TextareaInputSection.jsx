@@ -36,12 +36,12 @@ const Editor = ({ initialValue = '', content, setContent }) => {
   // const [quillValue, setQuillValue] = useState(initialValue);
 
   const handleOnChange = (value) => {
-    setContent(value);
+    setContent(value.replaceAll(/<\/?p[^>]*>/g, '').replace('<br>', ''));
   };
 
   return (
     <ReactQuill
-      value={content}
+      value={!content ? '<br>' : `<p>${content}</p>`}
       theme="snow"
       modules={modules}
       formats={formats}
