@@ -17,7 +17,10 @@ import {
   HeaderServiceEmojiList,
   HeaderServiceEmojiPicker,
   HeaderServiceEmojiToggle,
+  HeaderServiceImgA,
+  HeaderServiceImgB,
   HeaderServiceImgC,
+  HeaderServiceImgD,
   HeaderServiceMans,
   HeaderServiceMedio,
   HeaderServiceMessageCount,
@@ -30,9 +33,6 @@ import {
   HeaderServiceURLShareMenuKaKao,
   HeaderServiceURLToggle,
   Testdiv,
-  HeaderServiceImgA,
-  HeaderServiceImgB,
-  HeaderServiceImgD,
 } from './MessageListPageCss';
 import URLToast from './URLSave';
 
@@ -46,7 +46,7 @@ const HeaderUser = ({ data }) => {
 
   const location = useLocation();
   const { pathname } = location;
-  const webUrl = `http://localhost:3000${pathname}`;
+  const webUrl = `https://team8-rolling.netlify.app${pathname}`;
   const { id: userId } = useParams();
 
   const getReactionList = async (recipientId) => {
