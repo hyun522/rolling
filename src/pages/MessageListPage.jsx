@@ -34,6 +34,7 @@ const MessageListPage = () => {
   if (data === null) {
     return <div>로딩중</div>;
   }
+
   return (
     <>
       <Header hidden="true" />

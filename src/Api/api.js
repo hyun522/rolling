@@ -50,9 +50,10 @@ const getInformationLIke = async () => {
   } catch (err) {
     console.log(err.message);
   }
+  return null;
 
-  // eslint-disable-next-line consistent-return
 };
+
 // 최근에 만든 롤링페이퍼
 /* eslint-disable no-useless-return */
 const getInformation = async () => {
@@ -69,7 +70,7 @@ const getInformation = async () => {
 
 
   // eslint-disable-next-line consistent-return
-  return;
+  return null;
 };
 
 export const addReaction = async (id, emoji) => {
