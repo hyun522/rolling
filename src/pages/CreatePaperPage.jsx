@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import CppCreateButton from '../components/CppCreateButton';
 import CppSelectButton from '../components/CppSelectButton';
 import CppShowDiv from '../components/CppShowDiv';
-import { getDataBackgroundImg, postUserData } from '../api';
+import { getDataBackgroundImg, postUserData } from '../Api/api';
 
 const CppForm = styled.form``;
 

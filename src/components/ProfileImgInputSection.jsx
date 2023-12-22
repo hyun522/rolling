@@ -6,7 +6,7 @@ import {
   ProfileImgList,
   RoundImg,
 } from './style';
-import { fetchProfileImg } from '../Api/messageApi';
+import { fetchProfileImg } from '../Api/api';
 
 const ProfileImgInputSection = ({ children, setProfileImageURL }) => {
   const imgRef = useRef();
