@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Header from '../components/Header';
-import CppCreateButton from '../components/CppCreateButton';
-import CppSelectButton from '../components/CppSelectButton';
-import CppShowDiv from '../components/CppShowDiv';
+import CppCreateButton from '../components/CreatePaperPage/CppCreateButton';
+import CppSelectButton from '../components/CreatePaperPage/CppSelectButton';
+import CppShowDiv from '../components/CreatePaperPage/CppShowDiv';
 import { getDataBackgroundImg, postUserData } from '../Api/api';
 
 const CppForm = styled.form``;

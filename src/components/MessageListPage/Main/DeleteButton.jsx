@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { CardDeleted } from '../Header/MessageListPageCss';
-import { QuestionDeleteFetch } from '../../Api/api';
+import { QuestionDeleteFetch } from '../../../Api/api';
 
 const DeleteButton = ({ id }) => {
   const navigate = useNavigate();

@@ -1,11 +1,11 @@
 import EmojiPicker from 'emoji-picker-react';
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { addReaction, getReactions } from '../../Api/api';
-import Icon from '../../assets/images/Icon.png';
-import ArrowAdd from '../../assets/images/add-24.png';
-import ArrowDown from '../../assets/images/arrow_down.png';
-import Share from '../../assets/images/share-24.png';
+import { addReaction, getReactions } from '../../../Api/api';
+import Icon from '../../../assets/images/Icon.png';
+import ArrowAdd from '../../../assets/images/add-24.png';
+import ArrowDown from '../../../assets/images/arrow_down.png';
+import Share from '../../../assets/images/share-24.png';
 import {
   HeaderService,
   HeaderServiceBifurcationA,

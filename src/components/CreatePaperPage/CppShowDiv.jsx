@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import { styled } from 'styled-components';
-import enabled from '../assets/images/Enabled.svg';
+import enabled from '../../assets/images/Enabled.svg';
 import CppShowImgDiv from './CppShowImgDiv';
 
 const COLOR_CHIPS = [

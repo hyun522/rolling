@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { MessageDeleteFetch } from '../../Api/api';
-import Deleted from '../../assets/images/deleted.png';
-import Modal from '../../components/Modal';
+import { MessageDeleteFetch } from '../../../Api/api';
+import Deleted from '../../../assets/images/deleted.png';
+import Modal from '../Modal';
 import {
   CardContiner,
   CardPaper,

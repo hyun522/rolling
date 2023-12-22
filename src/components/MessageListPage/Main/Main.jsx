@@ -32,7 +32,6 @@ const Main = ({ isEditMode, data, id, messageData }) => {
         messageData={messageData}
         isEditMode={isEditMode}
         data={data}
-        // onClick={onClick}
         id={id}
       />
     </MainContent>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Create from '../../assets/images/plus.png';
+import Create from '../../../assets/images/plus.png';
 import { CardCreateContiner, CreateButton } from '../Header/MessageListPageCss';
 
 const CardPlus = ({ id }) => {

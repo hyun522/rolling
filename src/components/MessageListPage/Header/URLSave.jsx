@@ -1,6 +1,6 @@
 import { Toast, ToastCompleted } from './MessageListPageCss';
-import Completed from '../../assets/images/completed.png';
-import Close from '../../assets/images/close.png';
+import Completed from '../../../assets/images/completed.png';
+import Close from '../../../assets/images/close.png';
 
 const URLToast = () => {
   return (

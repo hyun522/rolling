@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import RollingPaperSummary from './RollingPaperSummary';
-import LeftArrow from '../assets/images/arrow_left.svg';
-import RightArrow from '../assets/images/arrow_right.svg';
+import LeftArrow from '../../assets/images/arrow_left.svg';
+import RightArrow from '../../assets/images/arrow_right.svg';
 
 const StyledRollingPapers = styled.div`
   justify-content: center;
@@ -128,13 +128,13 @@ const RollingPapers = ({ items, list }) => {
   const slider = useRef();
   const sliderBtnLeft = useRef();
   const sliderBtnRight = useRef();
-  const getWindowWidth = () => {
-    return (
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth
-    );
-  };
+  // const getWindowWidth = () => {
+  //   return (
+  //     window.innerWidth ||
+  //     document.documentElement.clientWidth ||
+  //     document.body.clientWidth
+  //   );
+  // };
 
   function updateButtonVisibility() {
     if (sliderBtnLeft.current && window.innerWidth > 1247) {

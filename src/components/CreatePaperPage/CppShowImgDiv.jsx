@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import enabled from '../assets/images/Enabled.svg';
+import enabled from '../../assets/images/Enabled.svg';
 
 const ColorDiv = styled.div`
   margin: 45px 0;

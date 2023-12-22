@@ -1,10 +1,13 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { StyledForm, StyledButton } from '../components/style';
-import TextInputSection from '../components/TextInputSection';
-import ProfileImgInputSection from '../components/ProfileImgInputSection';
-import TextareaInputSection from '../components/TextareaInputSection';
-import ToggleDownSection from '../components/ToggleDownSection';
+import {
+  StyledForm,
+  StyledButton,
+} from '../components/CreateMessagePage/style';
+import TextInputSection from '../components/CreateMessagePage/TextInputSection';
+import ProfileImgInputSection from '../components/CreateMessagePage/ProfileImgInputSection';
+import TextareaInputSection from '../components/CreateMessagePage/TextareaInputSection';
+import ToggleDownSection from '../components/CreateMessagePage/ToggleDownSection';
 import { createMessage } from '../Api/api';
 import Header from '../components/Header';
 
