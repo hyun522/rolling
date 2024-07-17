@@ -28,7 +28,6 @@ export const HeaderService = styled.div`
     width: 100%;
   }
 `;
-
 export const HeaderServiceMans = styled.div`
   position: relative;
   display: flex;
@@ -70,7 +69,7 @@ export const HeaderServiceMedio = styled.div`
 
 export const HeaderServiceImgA = styled.img`
   position: absolute;
-  left: -50px;
+  left: -66px;
   border-radius: 140px;
   border: 1.4px solid #fff;
   width: 28px;
@@ -78,18 +77,26 @@ export const HeaderServiceImgA = styled.img`
 `;
 export const HeaderServiceImgB = styled.img`
   position: absolute;
-  left: -36px;
+  left: -50px;
   border-radius: 140px;
   border: 1.4px solid #fff;
   width: 28px;
   height: 28px;
 `;
-export const HeaderServiceImgC = styled.div`
+export const HeaderServiceImgC = styled.img`
+  position: absolute;
+  left: -34px;
+  border-radius: 140px;
+  border: 1.4px solid #fff;
+  width: 28px;
+  height: 28px;
+`;
+export const HeaderServiceImgD = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
   position: absolute;
-  left: -22px;
+  left: -18px;
   border-radius: 140px;
   border: 1.4px solid #fff;
   width: 28px;
@@ -449,7 +456,7 @@ export const CardProfileComment = styled.div`
 `;
 
 export const CardProfileCreatedAt = styled.p`
-  margin: 0px 0px 24px 24px;
+  margin: 0px 24px 24px 24px;
   color: var(--gray-400, #999);
   font-family: Pretendard;
   font-size: 12px;
@@ -457,6 +464,8 @@ export const CardProfileCreatedAt = styled.p`
   font-weight: 400;
   line-height: 18px; /* 150% */
   letter-spacing: -0.06px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 // 쓰레기통 버튼들
@@ -560,15 +569,13 @@ export const ToastCompleted = styled.div`
   letter-spacing: -0.16px;
 `;
 
-// EmojiPicker라이브러리
-// 미디어쿼리 일단 임시방편으로 이렇게 처리함.
 export const HeaderServiceEmojiPicker = styled.div`
   right: 1px;
   top: 50px;
   z-index: 2;
   position: absolute;
   @media screen and (max-width: 768px) {
-    right: 230px;
+    right: 210px;
     width: 100%;
   }
 `;

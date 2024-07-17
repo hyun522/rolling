@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { StyledSection } from './style';
@@ -9,7 +9,6 @@ const toolbarOptions = [
   [{ list: 'ordered' }, { list: 'bullet' }],
   [{ color: [] }, { background: [] }],
 ];
-
 export const formats = [
   'bold',
   'italic',
@@ -32,16 +31,14 @@ const modules = {
   },
 };
 
-const Editor = ({ initialValue = '', content, setContent }) => {
-  // const [quillValue, setQuillValue] = useState(initialValue);
-
+const Editor = ({ content, setContent }) => {
   const handleOnChange = (value) => {
-    setContent(value);
+    setContent(value.replaceAll(/<\/?p[^>]*>/g, ''));
   };
 
   return (
     <ReactQuill
-      value={content}
+      value={!content ? '<br>' : `<p>${content}</p>`}
       theme="snow"
       modules={modules}
       formats={formats}

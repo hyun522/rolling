@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { StyledSection } from './style';
-import ToggleArrowDown from '../assets/images/toggle-arrow-down.svg';
-import ToggleArrowUp from '../assets/images/toggle-arrow-up.svg';
+import ToggleArrowDown from '../../assets/images/toggle-arrow-down.svg';
+import ToggleArrowUp from '../../assets/images/toggle-arrow-up.svg';
 
 const ToggleDownSection = ({
   children,
@@ -45,7 +45,6 @@ const ToggleDownSection = ({
 
   const selectOption = (e) => {
     setSelected(e.target.textContent);
-    // setIsOpen(false);
   };
 
   if (optionType === 'relationship') {

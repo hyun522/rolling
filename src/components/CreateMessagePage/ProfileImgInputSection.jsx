@@ -6,16 +6,9 @@ import {
   ProfileImgList,
   RoundImg,
 } from './style';
-import DefaultProfileImg from '../assets/images/default-profile-img.png';
-import SampleImg1 from '../assets/images/sample-profile-img-1.png';
-import SampleImg2 from '../assets/images/sample-profile-img-2.png';
-import { fetchProfileImg } from '../Api/messageApi';
+import { fetchProfileImg } from '../../Api/api';
 
-const ProfileImgInputSection = ({
-  children,
-  profileImageURL,
-  setProfileImageURL,
-}) => {
+const ProfileImgInputSection = ({ children, setProfileImageURL }) => {
   const imgRef = useRef();
   const [profileImgs, setProfileImgs] = useState([]);
 

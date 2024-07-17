@@ -1,21 +1,21 @@
 import { useState } from 'react';
+import { MessageDeleteFetch } from '../../../Api/api';
+import Deleted from '../../../assets/images/deleted.png';
+import Modal from '../Modal';
 import {
   CardContiner,
   CardPaper,
   CardProfile,
-  CardProfileSender,
-  CardProfileRelationship,
-  CardProfileTitle,
-  CardProfileFrom,
-  CardProfileName,
   CardProfileComment,
   CardProfileCreatedAt,
   CardProfileDeleted,
   CardProfileDeletedButton,
+  CardProfileFrom,
+  CardProfileName,
+  CardProfileRelationship,
+  CardProfileSender,
+  CardProfileTitle,
 } from '../Header/MessageListPageCss';
-import Deleted from '../../assets/images/deleted.png';
-import Modal from '../../components/Modal';
-import { MessageDeleteFetch } from '../../Api/api';
 
 const fontFamily = {
   'Noto Sans': 'Noto Sans KR',
@@ -23,7 +23,6 @@ const fontFamily = {
   나눔명조: 'Nanum Myeongjo',
   '나눔손글씨 손편지체': 'Handletter',
 };
-
 const CardList = ({ item, isEditMode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const {
@@ -36,10 +35,11 @@ const CardList = ({ item, isEditMode }) => {
     id,
   } = item;
 
-  const handleDelete = () => {
-    MessageDeleteFetch(id);
+  const handleDelete = async (e) => {
+    e.stopPropagation();
+    await MessageDeleteFetch(id);
+    window.location.reload();
   };
-
   const originalDateString = createdAt;
   const originalDate = new Date(originalDateString);
   const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -50,11 +50,12 @@ const CardList = ({ item, isEditMode }) => {
   const handleModal = () => {
     setIsOpen(true);
   };
-
   return (
     <>
-      {isOpen && <Modal modalDatas={item} setIsOpen={setIsOpen} />}
-      <CardContiner onClick={handleModal}>
+      {isOpen && (
+        <Modal date={newDateString} modalDatas={item} setIsOpen={setIsOpen} />
+      )}
+      <CardContiner>
         <CardProfile>
           <CardPaper src={profileImageURL} alt="프로필이미지" />
           <CardProfileTitle>
@@ -73,10 +74,12 @@ const CardList = ({ item, isEditMode }) => {
         <CardProfileComment font={fontFamily[font]}>
           {content}
         </CardProfileComment>
-        <CardProfileCreatedAt>{newDateString}</CardProfileCreatedAt>
+        <CardProfileCreatedAt onClick={handleModal}>
+          {newDateString}
+          <div>크게보기</div>
+        </CardProfileCreatedAt>
       </CardContiner>
     </>
   );
 };
-
 export default CardList;

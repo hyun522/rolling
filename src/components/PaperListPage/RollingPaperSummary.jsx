@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import beigeSvg from '../assets/images/beige.svg';
-import greenSvg from '../assets/images/green.svg';
-import purpleSvg from '../assets/images/purple.svg';
-import blueSvg from '../assets/images/blue.svg';
+import beigeSvg from '../../assets/images/beige.svg';
+import greenSvg from '../../assets/images/green.svg';
+import purpleSvg from '../../assets/images/purple.svg';
+import blueSvg from '../../assets/images/blue.svg';
 import TopReactions from './TopReactions';
 
 const BackgroundColors = {
@@ -229,7 +229,7 @@ const RollingPaperSummary = ({ item }) => {
             )}
           </CommenterImages>
           <p className="howManyWriters">
-            <strong>{item.recentMessages.length}</strong>명이 작성했어요!
+            <strong>{item.messageCount}</strong>명이 작성했어요!
           </p>
         </div>
         <div className="emoji">

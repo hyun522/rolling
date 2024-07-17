@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import RollingPapers from '../components/RollingPapers';
+import RollingPapers from '../components/PaperListPage/RollingPapers';
 import { getInformation, getInformationLIke } from '../Api/api';
 
 const ButtonArea = styled.div`
