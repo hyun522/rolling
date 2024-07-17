@@ -9,7 +9,6 @@ const toolbarOptions = [
   [{ list: 'ordered' }, { list: 'bullet' }],
   [{ color: [] }, { background: [] }],
 ];
-
 export const formats = [
   'bold',
   'italic',

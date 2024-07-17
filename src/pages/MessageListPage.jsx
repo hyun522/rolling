@@ -9,7 +9,6 @@ const MessageListPage = () => {
   const isEditMode = window.location.pathname.includes('/edit');
   const [data, setData] = useState(null);
   const [messageData, setMessageData] = useState(null);
-
   const QuestionFetch = async (userid) => {
     try {
       const response = await QuestionPersonFetch(userid);

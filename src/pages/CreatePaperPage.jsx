@@ -92,8 +92,12 @@ const CreatePaperPage = () => {
 
   const loadBackgroundImgData = async () => {
     const { imageUrls } = await getDataBackgroundImg();
-    console.log(imageUrls);
-    setBackgroundImgs(imageUrls);
+    // 최적화 실시
+    const imageUrlsSizeChange = imageUrls.map((url) =>
+      url.replace('3840/2160', '400/400'),
+    );
+    // setBackgroundImgs(imageUrls);
+    setBackgroundImgs(imageUrlsSizeChange);
   };
 
   useEffect(() => {
@@ -108,7 +112,6 @@ const CreatePaperPage = () => {
       return;
     }
     setError(null);
-    console.log(userName);
 
     let sendData;
     if (isColor) {
@@ -127,7 +130,6 @@ const CreatePaperPage = () => {
     }
 
     const { id } = await postUserData(sendData);
-    console.log(id);
     navigate(`/post/${id}`);
   };
 

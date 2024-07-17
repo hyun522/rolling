@@ -63,9 +63,7 @@ const HeaderUser = ({ data }) => {
   const profileImageURL3 = recentMessages[2]?.profileImageURL;
 
   const handleShare = () => setUrlMenu(!urlMenu);
-
   const handleEmoji = () => setShowEmoji(!showEmoji);
-
   const handleEmojiAdd = () => setShowEmojiPicker(!showEmojiPicker);
 
   const handleEmojiClick = async (emojiData) => {
@@ -101,7 +99,7 @@ const HeaderUser = ({ data }) => {
       });
     }
   };
-
+  // key 값 숨기는 방법.
   useEffect(() => {
     const KAKAO_KEY = '971f7771001245f764f53aed200f5a52';
     if (!window.Kakao.isInitialized()) {
