@@ -91,13 +91,8 @@ const CreatePaperPage = () => {
   const navigate = useNavigate();
 
   const loadBackgroundImgData = async () => {
-    const { imageUrls } = await getDataBackgroundImg();
-    // 최적화 실시
-    const imageUrlsSizeChange = imageUrls.map((url) =>
-      url.replace('3840/2160', '400/400'),
-    );
-    // setBackgroundImgs(imageUrls);
-    setBackgroundImgs(imageUrlsSizeChange);
+    const IMAGES = await getDataBackgroundImg();
+    setBackgroundImgs(IMAGES);
   };
 
   useEffect(() => {

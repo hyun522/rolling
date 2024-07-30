@@ -131,9 +131,14 @@ const createMessage = async (messageData) => {
 const getDataBackgroundImg = async () => {
   try {
     const response = await fetch(`${BASE_URL}background-images/`);
+
     const body = await response.json();
 
-    return body;
+    const result = body.imageUrls.map((images) =>
+      images.replace('3840/2160', '400/400'),
+    );
+
+    return result;
   } catch (err) {
     console.log(err.message);
   }
